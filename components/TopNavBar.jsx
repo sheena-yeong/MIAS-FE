@@ -1,10 +1,10 @@
-import {
-  IoIosNotificationsOutline,
-  IoIosHelpCircleOutline,
-} from 'react-icons/io';
+import { IoIosNotificationsOutline } from 'react-icons/io';
 import { IoSettingsOutline, IoSearchOutline } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
 
 function NavBar() {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="flex pl-5 justify-between items-center h-15 shadow-md">
@@ -19,8 +19,15 @@ function NavBar() {
           />
         </div>
         <div className="flex items-center gap-8 mr-5">
-          <IoIosNotificationsOutline size={23} />
-          <IoSettingsOutline size={23} />
+          <IoIosNotificationsOutline
+            size={23}
+            className="transition-transform duration-300 ease-in-out hover:rotate-12 hover:scale-110"
+          />
+          <IoSettingsOutline
+            size={23}
+            onClick={() => navigate('/settings')}
+            className="transition-transform duration-300 ease-in-out hover:rotate-45"
+          />
         </div>
       </div>
     </>
