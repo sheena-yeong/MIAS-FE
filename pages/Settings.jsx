@@ -1,7 +1,7 @@
 function Settings() {
   return (
     <>
-      <h3 className="p-5">Update Password</h3>
+      <h3 className="p-5 text-2xl">Settings</h3>
       <input></input>
     </>
   );

@@ -1,15 +1,27 @@
 import { useState } from 'react';
-import { sampleData } from '../data/sampledata';
+import { sampleAssets } from '../data/sampleAssets';
+import { IoIosAddCircle } from 'react-icons/io';
 import AssetTable from '../components/AssetTable';
+import QuickFilters from '../components/QuickFilters';
 
 export default function AssetManagement() {
   const [selectedRow, setSelectedRow] = useState(null);
-
+  const acions = ['Assign', 'Loan', 'Return'];
   return (
-    <AssetTable
-      selectedRow={selectedRow}
-      setSelectedRow={setSelectedRow}
-      sampleData={sampleData}
-    />
+    <>
+    <h3 className="p-3 text-3xl font-semibold mt-4 ml-2">Asset Management</h3>
+      <div className="flex justify-between items-center">
+      <QuickFilters />
+        <button className="flex items-center gap-2 m-3 bg-[#968b87] text-white font-medium px-4 py-2 rounded-xl shadow-sm hover:bg-[#a79d9a] transition-all duration-200 active:scale-95">
+          <IoIosAddCircle />
+          Add Asset
+        </button>
+      </div>
+      <AssetTable
+        selectedRow={selectedRow}
+        setSelectedRow={setSelectedRow}
+        sampleAssets={sampleAssets}
+      />
+    </>
   );
 }

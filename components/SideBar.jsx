@@ -8,7 +8,8 @@ import {
   IoTimeSharp,
   IoSettingsSharp,
 } from 'react-icons/io5';
-import { LuLayoutDashboard } from 'react-icons/lu';
+import { BsThreeDotsVertical } from 'react-icons/bs';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 import miasLogo from '../assets/mias_logo.png';
 import avatarBoy from '../assets/avatar-sample-boy.png';
@@ -20,9 +21,8 @@ function SideBar() {
   const navItems = [
     { name: 'Dashboard', icon: <IoHomeSharp />, path: '/dashboard' },
     { name: 'Asset Management', icon: <IoFolderOpen />, path: '/assets' },
-    // { name: 'Associate Management', icon: <IoPeopleSharp />, path: '/associates'  },
     { name: 'User Management', icon: <IoPersonSharp />, path: '/users' },
-    { name: 'History', icon: <IoTimeSharp />, path: '/history' },
+    { name: 'Transactions', icon: <IoTimeSharp />, path: '/history' },
   ];
 
   return (
@@ -48,7 +48,33 @@ function SideBar() {
           </button>
         ))}
       </div>
-      <img src={avatarBoy} className="w-10" />
+      <div className="flex justify-between items-center">
+        <div className="flex items-center">
+          <img src={avatarBoy} className="w-10 m-5" />
+          <div className="flex flex-col">
+            <h1>Simon Ong</h1>
+            <h1 className="text-slate-400">Admin</h1>
+          </div>
+        </div>
+        <div className="pr-3 transition-transform duration-300 ease-in-out hover:scale-110">
+          <DropdownMenu.Root>
+            <DropdownMenu.Trigger>
+              <BsThreeDotsVertical />
+            </DropdownMenu.Trigger>
+
+            <DropdownMenu.Portal>
+              <DropdownMenu.Content
+                className="bg-white text-black rounded-md shadow-lg p-2 m-2 min-w-[90px]"
+                sideOffset={5}
+                align="end"
+                alignOffset={-10}
+              >
+                <DropdownMenu.Item>Logout</DropdownMenu.Item>
+              </DropdownMenu.Content>
+            </DropdownMenu.Portal>
+          </DropdownMenu.Root>
+        </div>
+      </div>
     </>
   );
 }
