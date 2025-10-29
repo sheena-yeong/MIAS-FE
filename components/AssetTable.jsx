@@ -1,8 +1,7 @@
 import { MdOutlineEdit, MdDeleteOutline } from 'react-icons/md';
-import { FaRegComments } from "react-icons/fa6";
 import { LuUserPlus } from 'react-icons/lu';
 
-function AssetTable({ selectedRow, setSelectedRow, sampleAssets }) {
+function AssetTable({ selectedRow, setSelectedRow, sampleAssets, setIsOpen }) {
   return (
     <div className="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
       <table className="min-w-full divide-y divide-gray-200">
@@ -41,7 +40,7 @@ function AssetTable({ selectedRow, setSelectedRow, sampleAssets }) {
               <tr
                 key={row.serialNumber}
                 onClick={() => setSelectedRow(idx)}
-                className={`cursor-pointer transition-colors
+                className={`transition-colors
                   ${isSelected ? 'bg-blue-100' : 'hover:bg-gray-50'}`}
               >
                 <td className="px-6 py-4 text-sm text-gray-800">
@@ -67,15 +66,13 @@ function AssetTable({ selectedRow, setSelectedRow, sampleAssets }) {
                 </td>
                 <td className="px-6 py-4 text-sm text-gray-800">
                   <div className="flex gap-3">
-                    <button className="bg-blue-400 p-1 rounded-lg text-white">
-                      <MdOutlineEdit size={20} />
+                    <button className="bg-red-400 p-1 rounded-lg text-white cursor-pointer">
+                      <MdOutlineEdit size={20} onClick={() => setIsOpen(true)}/>
                     </button>
-                    <button className="bg-amber-400 p-1 rounded-lg text-white">
+                    <button className="bg-amber-400 p-1 rounded-lg text-white cursor-pointer">
                       <LuUserPlus size={20} />
                     </button>
-                    <button className="bg-red-400 p-1 rounded-lg text-white">
-                    <FaRegComments size={20} />
-                    </button>
+
                   </div>
                 </td>
               </tr>

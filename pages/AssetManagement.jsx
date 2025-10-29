@@ -3,16 +3,22 @@ import { sampleAssets } from '../data/sampleAssets';
 import { IoIosAddCircle } from 'react-icons/io';
 import AssetTable from '../components/AssetTable';
 import QuickFilters from '../components/QuickFilters';
+import PeekPanel from '../components/PeekPanel';
+import AssetDialog from '../components/AssetDialog';
 
 export default function AssetManagement() {
   const [selectedRow, setSelectedRow] = useState(null);
-  const acions = ['Assign', 'Loan', 'Return'];
+  const [isOpen, setIsOpen] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
+  
+  const actions = ['Assign', 'Loan', 'Return'];
+
   return (
     <>
-    <h3 className="p-3 text-3xl font-semibold mt-4 ml-2">Asset Management</h3>
+      <h3 className="p-3 text-3xl font-semibold mt-4 ml-2">Asset Management</h3>
       <div className="flex justify-between items-center">
-      <QuickFilters />
-        <button className="flex items-center gap-2 m-3 bg-[#968b87] text-white font-medium px-4 py-2 rounded-xl shadow-sm hover:bg-[#a79d9a] transition-all duration-200 active:scale-95">
+        <QuickFilters />
+        <button className="flex items-center gap-2 m-3 bg-[#968b87] text-white font-medium px-4 py-2 rounded-xl shadow-sm hover:bg-[#a79d9a] transition-all duration-200 active:scale-95" onClick={() => setOpenDialog(true)}>
           <IoIosAddCircle />
           Add Asset
         </button>
@@ -21,7 +27,16 @@ export default function AssetManagement() {
         selectedRow={selectedRow}
         setSelectedRow={setSelectedRow}
         sampleAssets={sampleAssets}
+        setIsOpen={setIsOpen}
       />
+
+      <PeekPanel
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        selectedAsset={selectedRow}
+      />
+
+      <AssetDialog open={openDialog} setOpen={setOpenDialog}/>
     </>
   );
 }

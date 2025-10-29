@@ -1,7 +1,7 @@
 import { IoIosNotificationsOutline } from 'react-icons/io';
 import { IoSettingsOutline, IoSearchOutline } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
-import { MdOutlineMenuOpen } from 'react-icons/md';
+import { IoIosMenu } from "react-icons/io";
 
 function NavBar({ isMenuCollapsed, setIsMenuCollapsed }) {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ function NavBar({ isMenuCollapsed, setIsMenuCollapsed }) {
     <>
       <div className="flex pl-5 justify-between items-center h-15 shadow-md">
         <div className="flex gap-2 items-center">
-          <MdOutlineMenuOpen
+          <IoIosMenu
             size={25}
             onClick={() => setIsMenuCollapsed(!isMenuCollapsed)}
           />

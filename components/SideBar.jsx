@@ -38,6 +38,7 @@ function SideBar({ isMenuCollapsed }) {
             className="h-full w-auto object-contain transition-all duration-300"
           />
         </div>
+        
         {/* Items */}
         {navItems.map((item) => (
           <button
@@ -72,7 +73,7 @@ function SideBar({ isMenuCollapsed }) {
       <div className={`flex items-center w-full transition-all duration-300 ${
         isMenuCollapsed ? 'justify-center' : 'justify-between'
       }`}>
-        <div className="flex items-center gap-3 min-w-0">
+        <div className="flex items-center min-w-0">
           <img src={avatarBoy} className="w-10 m-5" />
           <div 
             className={`flex flex-col min-w-0 transition-all duration-300 overflow-hidden ${
