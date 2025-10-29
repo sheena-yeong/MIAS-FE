@@ -1,4 +1,5 @@
 import { MdOutlineEdit, MdDeleteOutline } from 'react-icons/md';
+import { FaRegComments } from "react-icons/fa6";
 import { LuUserPlus } from 'react-icons/lu';
 
 function AssetTable({ selectedRow, setSelectedRow, sampleAssets }) {
@@ -73,7 +74,7 @@ function AssetTable({ selectedRow, setSelectedRow, sampleAssets }) {
                       <LuUserPlus size={20} />
                     </button>
                     <button className="bg-red-400 p-1 rounded-lg text-white">
-                    <MdDeleteOutline size={20} />
+                    <FaRegComments size={20} />
                     </button>
                   </div>
                 </td>

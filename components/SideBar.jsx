@@ -1,34 +1,44 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  IoHomeSharp,
-  IoFolderOpen,
-  IoPeopleSharp,
-  IoPersonSharp,
-  IoTimeSharp,
-  IoSettingsSharp,
-} from 'react-icons/io5';
+import { IoHomeSharp, IoFolderOpen, IoPeopleSharp } from 'react-icons/io5';
+import { LuHistory } from 'react-icons/lu';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 import miasLogo from '../assets/mias_logo.png';
+import miasLogoCollapsed from '../assets/mias_logo_collapsed.png';
 import avatarBoy from '../assets/avatar-sample-boy.png';
 
-function SideBar() {
+function SideBar({ isMenuCollapsed }) {
   const navigate = useNavigate();
 
   const [active, setActive] = useState('');
   const navItems = [
     { name: 'Dashboard', icon: <IoHomeSharp />, path: '/dashboard' },
     { name: 'Asset Management', icon: <IoFolderOpen />, path: '/assets' },
-    { name: 'User Management', icon: <IoPersonSharp />, path: '/users' },
-    { name: 'Transactions', icon: <IoTimeSharp />, path: '/history' },
+    { name: 'User Management', icon: <IoPeopleSharp />, path: '/users' },
+    { name: 'Transactions', icon: <LuHistory />, path: '/history' },
   ];
 
   return (
-    <>
-      <div className="flex flex-col items-start p-3 space-y-2">
-        <img src={miasLogo} className="mt-3 mb-8" />
+    <div
+      className={`flex flex-col justify-between h-full transition-all duration-300 items-start
+      ${isMenuCollapsed ? 'w-20' : 'w-64'}`}
+    >
+      <div className="flex flex-col items-start p-3 space-y-2 w-full">
+
+        {/* Logo */}
+        <div
+          className={`flex w-full mt-3 ${
+            isMenuCollapsed ? 'justify-center' : 'justify-start'
+          } mb-8 h-15 items-center`}
+        >
+          <img 
+            src={isMenuCollapsed ? miasLogoCollapsed : miasLogo} 
+            className="h-full w-auto object-contain transition-all duration-300"
+          />
+        </div>
+        {/* Items */}
         {navItems.map((item) => (
           <button
             key={item.name}
@@ -36,27 +46,53 @@ function SideBar() {
               setActive(item.name);
               navigate(item.path);
             }}
-            className={`flex items-center gap-2 py-3 text-lg w-full text-left px-3 rounded-md transition-colors
+            className={`flex items-center gap-3 py-3 text-lg w-full text-left px-3 rounded-md transition-all duration-300
           ${
             active === item.name
               ? 'bg-[#ff5c5c] text-black'
               : 'hover:bg-[#4a4949]'
-          }`}
+          }
+          ${isMenuCollapsed ? 'justify-center' : ''}`}
           >
             <span className="w-5 h-5">{item.icon}</span>
-            {item.name}
+            <span 
+              className={`whitespace-nowrap transition-all duration-300 overflow-hidden ${
+                isMenuCollapsed 
+                  ? 'opacity-0 w-0' 
+                  : 'opacity-100'
+              }`}
+            >
+              {item.name}
+            </span>
           </button>
         ))}
       </div>
-      <div className="flex justify-between items-center">
-        <div className="flex items-center">
+
+      {/* Avatar Card */}
+      <div className={`flex items-center w-full transition-all duration-300 ${
+        isMenuCollapsed ? 'justify-center' : 'justify-between'
+      }`}>
+        <div className="flex items-center gap-3 min-w-0">
           <img src={avatarBoy} className="w-10 m-5" />
-          <div className="flex flex-col">
-            <h1>Simon Ong</h1>
-            <h1 className="text-slate-400">Admin</h1>
+          <div 
+            className={`flex flex-col min-w-0 transition-all duration-300 overflow-hidden ${
+              isMenuCollapsed 
+                ? 'opacity-0 w-0' 
+                : 'opacity-100'
+            }`}
+          >
+            <h1 className="whitespace-nowrap">Simon Ong</h1>
+            <h1 className="text-slate-400 whitespace-nowrap">Admin</h1>
           </div>
         </div>
-        <div className="pr-3 transition-transform duration-300 ease-in-out hover:scale-110">
+
+        <div 
+          className={`pr-3 transition-all duration-300 ${
+            isMenuCollapsed 
+              ? 'opacity-0 w-0 overflow-hidden' 
+              : 'opacity-100 hover:scale-110'
+          }`}
+        >
           <DropdownMenu.Root>
             <DropdownMenu.Trigger>
               <BsThreeDotsVertical />
@@ -75,7 +111,7 @@ function SideBar() {
           </DropdownMenu.Root>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
