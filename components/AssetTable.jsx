@@ -70,6 +70,9 @@ function AssetTable({
               <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
                 Owner
               </th>
+                            <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
+                Status
+              </th>
               <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
                 Actions
               </th>
@@ -105,6 +108,9 @@ function AssetTable({
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-800">
                     {row.ownership}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-800">
+                    {row.actionType}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-800">
                     <div className="flex gap-3">
