@@ -6,7 +6,7 @@ import QuickFilters from '../components/QuickFilters';
 import PeekPanel from '../components/PeekPanel';
 import AssetDialog from '../components/AssetDialog';
 
-export default function AssetManagement() {
+export default function AssetManagement({assetData}) {
   const [selectedRow, setSelectedRow] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
@@ -18,7 +18,7 @@ export default function AssetManagement() {
       <h3 className="p-3 text-3xl font-semibold mt-4 ml-2">Asset Management</h3>
       <div className="flex justify-between items-center">
         <QuickFilters />
-        <button className="flex items-center gap-2 m-3 bg-[#968b87] text-white font-medium px-4 py-2 rounded-xl shadow-sm hover:bg-[#a79d9a] transition-all duration-200 active:scale-95" onClick={() => setOpenDialog(true)}>
+        <button className="flex items-center gap-2 m-3 bg-slate-500 text-white font-medium px-4 py-2 rounded-xl shadow-sm hover:bg-[#a79d9a] transition-all duration-200 active:scale-95" onClick={() => setOpenDialog(true)}>
           <IoIosAddCircle />
           Add Asset
         </button>
@@ -28,6 +28,7 @@ export default function AssetManagement() {
         setSelectedRow={setSelectedRow}
         sampleAssets={sampleAssets}
         setIsOpen={setIsOpen}
+        assetData={assetData}
       />
 
       <PeekPanel
