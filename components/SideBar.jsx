@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { IoHomeSharp, IoFolderOpen, IoPeopleSharp } from 'react-icons/io5';
 import { LuHistory } from 'react-icons/lu';
 import { BsThreeDotsVertical } from 'react-icons/bs';
@@ -11,8 +11,8 @@ import avatarBoy from '../assets/avatar-sample-boy.png';
 
 function SideBar({ isMenuCollapsed }) {
   const navigate = useNavigate();
+  const location = useLocation(); // grabs the current path from param
 
-  const [active, setActive] = useState('');
   const navItems = [
     { name: 'Dashboard', icon: <IoHomeSharp />, path: '/dashboard' },
     { name: 'Asset Management', icon: <IoFolderOpen />, path: '/assets' },
@@ -44,12 +44,11 @@ function SideBar({ isMenuCollapsed }) {
           <button
             key={item.name}
             onClick={() => {
-              setActive(item.name);
               navigate(item.path);
             }}
             className={`flex items-center gap-3 py-3 text-lg w-full text-left px-3 rounded-md transition-all duration-300
           ${
-            active === item.name
+            location.pathname === item.path
               ? 'bg-[#ff5c5c] text-black'
               : 'hover:bg-[#4a4949]'
           }
