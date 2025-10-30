@@ -17,7 +17,7 @@ function SideBar({ isMenuCollapsed }) {
     { name: 'Dashboard', icon: <IoHomeSharp />, path: '/dashboard' },
     { name: 'Asset Management', icon: <IoFolderOpen />, path: '/assets' },
     { name: 'User Management', icon: <IoPeopleSharp />, path: '/users' },
-    { name: 'Transactions', icon: <LuHistory />, path: '/history' },
+    { name: 'Transactions', icon: <LuHistory />, path: '/transactions' },
   ];
 
   return (
@@ -38,7 +38,7 @@ function SideBar({ isMenuCollapsed }) {
             className="h-full w-auto object-contain transition-all duration-300"
           />
         </div>
-        
+
         {/* Items */}
         {navItems.map((item) => (
           <button

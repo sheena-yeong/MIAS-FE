@@ -1,7 +1,7 @@
 function Settings() {
   return (
     <>
-      <h3 className="p-5 text-2xl">Settings</h3>
+      <h3 className="p-3 text-3xl font-semibold mt-4 ml-2">Settings</h3>
       <input></input>
     </>
   );
