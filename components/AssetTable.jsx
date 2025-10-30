@@ -70,7 +70,10 @@ function AssetTable({
               <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
                 Owner
               </th>
-                            <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
+                Acknowledged
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
                 Status
               </th>
               <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
@@ -107,7 +110,10 @@ function AssetTable({
                     {row.invoice}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-800">
-                    {row.ownership}
+                    {row.owner}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-800">
+                    {row.acknowledged}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-800">
                     {row.actionType}
@@ -136,9 +142,8 @@ function AssetTable({
       {totalPages > 1 && (
         <div className="flex items-center justify-between mt-4 px-4">
           <div className="text-sm text-gray-600">
-            Showing {startIndex + 1} to{' '}
-            {Math.min(endIndex, assetData.length)} of {assetData.length}{' '}
-            assets
+            Showing {startIndex + 1} to {Math.min(endIndex, assetData.length)}{' '}
+            of {assetData.length} assets
           </div>
 
           <div className="flex gap-2">

@@ -1,18 +1,16 @@
 import { useState } from 'react';
 import { sampleAssets } from '../data/sampleAssets';
 import { IoIosAddCircle } from 'react-icons/io';
-import { HiOutlineRefresh } from "react-icons/hi";
+import { HiOutlineRefresh } from 'react-icons/hi';
 import AssetTable from '../components/AssetTable';
 import QuickFilters from '../components/QuickFilters';
 import PeekPanel from '../components/PeekPanel';
 import AssetDialog from '../components/AssetDialog';
 
-export default function AssetManagement({assetData, fetchAssets}) {
+export default function AssetManagement({ assetData, fetchAssets }) {
   const [selectedRow, setSelectedRow] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
-  
-  const actions = ['Assigned', 'Loaned', 'Available'];
 
   return (
     <>
@@ -20,11 +18,20 @@ export default function AssetManagement({assetData, fetchAssets}) {
       <div className="flex justify-between items-center">
         <QuickFilters />
         <div className="flex items-center">
-        <HiOutlineRefresh size={25} onClick={fetchAssets} className="transition-transform duration-200 hover:scale-110"/>
-        <button className="flex items-center gap-2 m-3 bg-slate-500 text-white font-medium px-4 py-2 rounded-xl shadow-sm hover:bg-[#a79d9a] transition-all duration-200 active:scale-95" onClick={() => setOpenDialog(true)}>
-          <IoIosAddCircle />
-          Add Asset
-        </button>
+          <HiOutlineRefresh
+            size={25}
+            onClick={fetchAssets}
+            className="transition-transform duration-200 hover:rotate-45"
+          />
+          <button
+            className="flex items-center gap-2 m-3 bg-slate-500 text-white font-medium px-4 py-2 rounded-xl shadow-sm hover:bg-[#a79d9a] transition-all duration-200 active:scale-95"
+            onClick={() => {
+              setOpenDialog(true);
+            }}
+          >
+            <IoIosAddCircle />
+            Add Asset
+          </button>
         </div>
       </div>
       <AssetTable
@@ -41,7 +48,7 @@ export default function AssetManagement({assetData, fetchAssets}) {
         selectedAsset={selectedRow}
       />
 
-      <AssetDialog open={openDialog} setOpen={setOpenDialog}/>
+      <AssetDialog open={openDialog} setOpen={setOpenDialog} />
     </>
   );
 }
