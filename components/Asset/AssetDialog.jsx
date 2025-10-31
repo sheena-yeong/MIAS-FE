@@ -1,7 +1,7 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import { IoCloseCircleOutline } from 'react-icons/io5';
 import { useState, useEffect } from 'react';
-import { createAsset, updateAsset } from '../services/asset';
+import { createAsset, updateAsset } from '../../services/asset';
 
 function AssetDialog({ openDialog, setOpenDialog, selectedAsset, fetchAssets }) {
   /* ========== useStates and useEffect ========== */

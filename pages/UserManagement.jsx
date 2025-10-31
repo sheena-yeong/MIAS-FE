@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { sampleData } from '../data/sampledata';
-import UserTable from '../components/UserTable';
+import UserTable from '../components/User/UserTable';
 
 export default function UserManagement() {
   const [selectedRow, setSelectedRow] = useState(null);

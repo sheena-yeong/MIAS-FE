@@ -1,7 +1,7 @@
 import { MdOutlineEdit, MdDeleteOutline } from 'react-icons/md';
 import { FaRegComments } from "react-icons/fa";
 import AssetDeleteAlert from './AssetDeleteAlert.jsx';
-import { deleteAsset } from '../services/asset.js';
+import { deleteAsset } from '../../services/asset.js';
 import { LuUserPlus } from 'react-icons/lu';
 import { useState } from 'react';
 

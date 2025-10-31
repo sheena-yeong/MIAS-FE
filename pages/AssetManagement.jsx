@@ -2,10 +2,10 @@ import { useState } from 'react';
 // import { sampleAssets } from '../data/sampleAssets';
 import { IoIosAddCircle } from 'react-icons/io';
 import { HiOutlineRefresh } from 'react-icons/hi';
-import AssetTable from '../components/AssetTable';
-import QuickFilters from '../components/QuickFilters';
+import AssetTable from '../components/Asset/AssetTable';
+import QuickFilters from '../components/Asset/QuickFilters';
 import PeekPanel from '../components/PeekPanel';
-import AssetDialog from '../components/AssetDialog';
+import AssetDialog from '../components/Asset/AssetDialog';
 
 export default function AssetManagement({ assetData, fetchAssets }) {
   const [selectedRow, setSelectedRow] = useState(null);
