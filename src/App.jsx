@@ -17,7 +17,6 @@ function App() {
     try {
       const data = await getAllAssets();
       if (data) setAssetData(data);
-      console.log('Fetched assets:', data);
     } catch (error) {
       console.log('Error fetching asset data from BE:', error);
     }

@@ -5,7 +5,7 @@ function AssetDeleteAlert({ openAlert, setOpenAlert, handleDelete }) {
   return (
     <AlertDialog.Root open={openAlert} onOpenChange={setOpenAlert}>
       <AlertDialog.Portal>
-        <AlertDialog.Overlay className="fixed inset-0 bg-black/40" />
+        <AlertDialog.Overlay className="fixed inset-0 bg-black/20" />
         <AlertDialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-sm">
           <AlertDialog.Title className="text-lg font-semibold mb-2">
             Are you absolutely sure?

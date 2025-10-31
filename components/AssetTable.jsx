@@ -1,4 +1,5 @@
 import { MdOutlineEdit, MdDeleteOutline } from 'react-icons/md';
+import { FaRegComments } from "react-icons/fa";
 import AssetDeleteAlert from './AssetDeleteAlert.jsx';
 import { deleteAsset } from '../services/asset.js';
 import { LuUserPlus } from 'react-icons/lu';
@@ -147,8 +148,8 @@ function AssetTable({
                           }}
                         />
                       </button>
-                      <button className="bg-amber-400 p-1 rounded-lg text-white cursor-pointer">
-                        <LuUserPlus size={20} />
+                      <button className="bg-yellow-500 p-1 rounded-lg text-white cursor-pointer">
+                        <FaRegComments size={20} />
                       </button>
                       <button className="bg-red-400 p-1 rounded-lg text-white cursor-pointer">
                         <MdDeleteOutline
