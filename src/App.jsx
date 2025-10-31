@@ -13,21 +13,18 @@ function App() {
   const [isMenuCollapsed, setIsMenuCollapsed] = useState(false);
   const [assetData, setAssetData] = useState([]);
 
-  function fetchAssets() {
+  async function fetchAssets() {
     try {
-      const fetchAssets = async () => {
-        const data = await getAllAssets();
-        if (data) setAssetData(data);
-        console.log('Fetched assets:', data);
-      };
-      fetchAssets();
+      const data = await getAllAssets();
+      if (data) setAssetData(data);
+      console.log('Fetched assets:', data);
     } catch (error) {
       console.log('Error fetching asset data from BE:', error);
     }
   }
 
   useEffect(() => {
-    fetchAssets()
+    fetchAssets();
   }, []);
 
   return (
@@ -45,7 +42,15 @@ function App() {
           <main className="flex-1 overflow-auto bg-gray-50 p-6">
             <Routes>
               <Route path="/" element={<Dashboard />} />
-              <Route path="/assets" element={<AssetManagement assetData={assetData} fetchAssets={fetchAssets}/>} />
+              <Route
+                path="/assets"
+                element={
+                  <AssetManagement
+                    assetData={assetData}
+                    fetchAssets={fetchAssets}
+                  />
+                }
+              />
               <Route path="/users" element={<UserManagement />} />
               <Route path="/transactions" element={<Transactions />} />
               <Route path="*" element={<Dashboard />} />
