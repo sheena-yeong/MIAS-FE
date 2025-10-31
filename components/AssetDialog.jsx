@@ -3,19 +3,17 @@ import { IoCloseCircleOutline } from 'react-icons/io5';
 import { useState, useEffect } from 'react';
 import { createAsset } from '../services/asset';
 
-function AssetDialog({
-  openDialog,
-  setOpenDialog,
-  selectedAsset,
-}) {
+function AssetDialog({ openDialog, setOpenDialog, selectedAsset, fetchAssets }) {
+  /* ========== useStates and useEffect ========== */
+  const [isEditMode, setIsEditMode] = useState(false);
   const [newAsset, setNewAsset] = useState({
     category: '',
     assetName: '',
     serialNumber: '',
     origin: '',
     condition: '',
-    invoice: null,
-    owner: null,
+    invoice: '',
+    owner: '',
     actionType: '',
     acknowledged: false,
   });
@@ -33,11 +31,14 @@ function AssetDialog({
         actionType: selectedAsset.actionType || '',
         acknowledged: selectedAsset.acknowledged || false,
       });
+      setIsEditMode(true);
     } else {
       resetValues();
+      setIsEditMode(false);
     }
   }, [selectedAsset]);
 
+  /* ========== Arrays ========== */
   const categories = [
     'Laptop',
     'Desktop',
@@ -50,6 +51,7 @@ function AssetDialog({
   ];
   const conditions = ['New', 'Used', 'Damaged', 'Disposed'];
 
+  /* ========== Functions ========== */
   function resetValues() {
     setNewAsset({
       category: '',
@@ -57,20 +59,22 @@ function AssetDialog({
       serialNumber: '',
       origin: '',
       condition: '',
-      invoice: null,
-      owner: null,
+      invoice: '',
+      owner: '',
       actionType: '',
-      acknowledged: '',
+      acknowledged: false,
     });
+    setIsEditMode(false);
   }
 
   async function handleCreateAsset(e) {
     e.preventDefault();
-    console.log(newAsset);
     try {
       const result = await createAsset(newAsset);
       resetValues();
       setOpenDialog(false);
+      fetchAssets();
+      console.log('Asset created:', result);
     } catch (error) {
       console.log('Failed to create asset', error);
     }
@@ -84,16 +88,16 @@ function AssetDialog({
   return (
     <Dialog.Root
       open={openDialog}
-      onOpenChange={() => {
-        if (!openDialog) resetValues();
-        setOpenDialog();
+      onOpenChange={(open) => {
+        if (!open) resetValues();
+        setOpenDialog(open);
       }}
     >
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-black/20 z-50" />
         <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-xl p-6 w-full max-w-md z-50">
-          <Dialog.Title className="text-xl font-semibold mb-2">
-            New Asset
+          <Dialog.Title className="text-2xl font-semibold mb-4">
+            {isEditMode ? 'Edit Asset' : 'New Asset'}
           </Dialog.Title>
           {/* <Dialog.Description className="text-sm text-gray-600 mb-4">
         </Dialog.Description> */}
@@ -245,12 +249,12 @@ function AssetDialog({
               </select>
             </fieldset>
 
-            <div className="flex justify-end mt-6">
+            <div className="flex justify-end mt-6 gap-2">
               <button
                 type="submit"
                 className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-400 transition-colors"
               >
-                Add
+                {isEditMode ? 'Save Changes' : 'Add New Asset'}
               </button>
             </div>
 

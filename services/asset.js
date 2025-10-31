@@ -17,6 +17,14 @@ export const createAsset = async (newAsset) => {
     return res.data;
   } catch (error) {
     console.log(`Error in creating asset: ${error.message}`);
-    console.log('Error response:', error.response?.data);
   }
 };
+
+export const updateAsset = async (updatedAsset) => {
+    try {
+    const res = await axios.post(`${BASE_URL}/assets`, newAsset);
+    return res.data;
+  } catch (error) {
+    console.log(`Error in creating asset: ${error.message}`);
+  }
+}

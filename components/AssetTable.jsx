@@ -5,7 +5,7 @@ import { useState } from 'react';
 function AssetTable({
   selectedRow,
   setSelectedRow,
-  sampleAssets,
+  // sampleAssets,
   assetData,
   setOpenDialog,
   setSelectedAsset,

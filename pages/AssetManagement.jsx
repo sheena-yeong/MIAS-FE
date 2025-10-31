@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { sampleAssets } from '../data/sampleAssets';
+// import { sampleAssets } from '../data/sampleAssets';
 import { IoIosAddCircle } from 'react-icons/io';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import AssetTable from '../components/AssetTable';
@@ -10,7 +10,7 @@ import AssetDialog from '../components/AssetDialog';
 export default function AssetManagement({ assetData, fetchAssets }) {
   const [selectedRow, setSelectedRow] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
-  const [selectedAsset, setSelectedAsset] = useState([]);
+  const [selectedAsset, setSelectedAsset] = useState(null);
   const [isOpen, setIsOpen] = useState(false); // for peek panel
 
   return (
@@ -27,7 +27,7 @@ export default function AssetManagement({ assetData, fetchAssets }) {
           <button
             className="flex items-center gap-2 m-3 bg-slate-500 text-white font-medium px-4 py-2 rounded-xl shadow-sm hover:bg-[#a79d9a] transition-all duration-200 active:scale-95"
             onClick={() => {
-              setSelectedAsset(null)
+              setSelectedAsset(null);
               setOpenDialog(true);
             }}
           >
@@ -56,6 +56,7 @@ export default function AssetManagement({ assetData, fetchAssets }) {
         openDialog={openDialog}
         setOpenDialog={setOpenDialog}
         selectedAsset={selectedAsset}
+        fetchAssets={fetchAssets}
       />
     </>
   );
