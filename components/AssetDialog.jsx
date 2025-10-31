@@ -1,7 +1,7 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import { IoCloseCircleOutline } from 'react-icons/io5';
 import { useState, useEffect } from 'react';
-import { createAsset } from '../services/asset';
+import { createAsset, updateAsset } from '../services/asset';
 
 function AssetDialog({ openDialog, setOpenDialog, selectedAsset, fetchAssets }) {
   /* ========== useStates and useEffect ========== */
@@ -80,6 +80,19 @@ function AssetDialog({ openDialog, setOpenDialog, selectedAsset, fetchAssets }) 
     }
   }
 
+  async function handleUpdateAsset(e) {
+    e.preventDefault();
+    try {
+      const result = await updateAsset(newAsset, selectedAsset._id);
+      resetValues();
+      setOpenDialog(false);
+      fetchAssets();
+      console.log('Asset updated:', result);
+    } catch (error) {
+      console.log('Failed to update asset', error);
+    }
+  }
+
   function handleInputChange(e) {
     const { name, value } = e.target;
     setNewAsset((prev) => ({ ...prev, [name]: value }));
@@ -101,7 +114,7 @@ function AssetDialog({ openDialog, setOpenDialog, selectedAsset, fetchAssets }) 
           </Dialog.Title>
           {/* <Dialog.Description className="text-sm text-gray-600 mb-4">
         </Dialog.Description> */}
-          <form onSubmit={handleCreateAsset}>
+          <form onSubmit={isEditMode ? handleUpdateAsset : handleCreateAsset}>
             <fieldset className="mb-4">
               <label
                 className="block text-sm font-medium mb-1"

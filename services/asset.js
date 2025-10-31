@@ -20,11 +20,11 @@ export const createAsset = async (newAsset) => {
   }
 };
 
-export const updateAsset = async (updatedAsset) => {
+export const updateAsset = async (updatedAsset, assetId) => {
     try {
-    const res = await axios.post(`${BASE_URL}/assets`, newAsset);
+    const res = await axios.put(`${BASE_URL}/assets/${assetId}`, updatedAsset);
     return res.data;
   } catch (error) {
-    console.log(`Error in creating asset: ${error.message}`);
+    console.log(`Error in updating asset: ${error.message}`);
   }
 }
