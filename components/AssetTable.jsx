@@ -1,4 +1,6 @@
 import { MdOutlineEdit, MdDeleteOutline } from 'react-icons/md';
+import AssetDeleteAlert from './AssetDeleteAlert.jsx';
+import { deleteAsset } from '../services/asset.js';
 import { LuUserPlus } from 'react-icons/lu';
 import { useState } from 'react';
 
@@ -8,8 +10,11 @@ function AssetTable({
   // sampleAssets,
   assetData,
   setOpenDialog,
+  selectedAsset,
   setSelectedAsset,
+  fetchAssets,
 }) {
+  const [openAlert, setOpenAlert] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
@@ -44,8 +49,20 @@ function AssetTable({
     setSelectedRow(null);
   }
 
+  function handleDelete() {
+    deleteAsset(selectedAsset._id);
+    setOpenAlert(false);
+    fetchAssets();
+  }
+
   return (
     <div>
+      <AssetDeleteAlert
+        openAlert={openAlert}
+        setOpenAlert={setOpenAlert}
+        handleDelete={handleDelete}
+      />
+
       <div className="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-100">
@@ -120,8 +137,8 @@ function AssetTable({
                     {row.actionType}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-800">
-                    <div className="flex gap-3">
-                      <button className="bg-red-400 p-1 rounded-lg text-white cursor-pointer">
+                    <div className="flex gap-1">
+                      <button className="bg-blue-400 p-1 rounded-lg text-white cursor-pointer">
                         <MdOutlineEdit
                           size={20}
                           onClick={() => {
@@ -132,6 +149,15 @@ function AssetTable({
                       </button>
                       <button className="bg-amber-400 p-1 rounded-lg text-white cursor-pointer">
                         <LuUserPlus size={20} />
+                      </button>
+                      <button className="bg-red-400 p-1 rounded-lg text-white cursor-pointer">
+                        <MdDeleteOutline
+                          size={20}
+                          onClick={() => {
+                            setSelectedAsset(row);
+                            setOpenAlert(true);
+                          }}
+                        />
                       </button>
                     </div>
                   </td>

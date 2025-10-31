@@ -21,10 +21,19 @@ export const createAsset = async (newAsset) => {
 };
 
 export const updateAsset = async (updatedAsset, assetId) => {
-    try {
+  try {
     const res = await axios.put(`${BASE_URL}/assets/${assetId}`, updatedAsset);
     return res.data;
   } catch (error) {
     console.log(`Error in updating asset: ${error.message}`);
   }
-}
+};
+
+export const deleteAsset = async (assetId) => {
+  try {
+    const res = await axios.delete(`${BASE_URL}/assets/${assetId}`);
+    return res.data;
+  } catch (error) {
+    console.log(`Error in deleting asset: ${error.message}`);
+  }
+};

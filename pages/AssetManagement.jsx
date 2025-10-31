@@ -43,7 +43,9 @@ export default function AssetManagement({ assetData, fetchAssets }) {
         assetData={assetData}
         openDialog={openDialog}
         setOpenDialog={setOpenDialog}
+        selectedAsset={selectedAsset}
         setSelectedAsset={setSelectedAsset}
+        fetchAssets={fetchAssets}
       />
 
       {/* <PeekPanel
