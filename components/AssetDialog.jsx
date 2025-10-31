@@ -1,9 +1,13 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import { IoCloseCircleOutline } from 'react-icons/io5';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { createAsset } from '../services/asset';
 
-function AssetDialog({ open, setOpen }) {
+function AssetDialog({
+  openDialog,
+  setOpenDialog,
+  selectedAsset,
+}) {
   const [newAsset, setNewAsset] = useState({
     category: '',
     assetName: '',
@@ -15,6 +19,24 @@ function AssetDialog({ open, setOpen }) {
     actionType: '',
     acknowledged: false,
   });
+
+  useEffect(() => {
+    if (selectedAsset) {
+      setNewAsset({
+        category: selectedAsset.category || '',
+        assetName: selectedAsset.assetName || '',
+        serialNumber: selectedAsset.serialNumber || '',
+        origin: selectedAsset.origin || '',
+        condition: selectedAsset.condition || '',
+        invoice: selectedAsset.invoice || '',
+        owner: selectedAsset.owner || '',
+        actionType: selectedAsset.actionType || '',
+        acknowledged: selectedAsset.acknowledged || false,
+      });
+    } else {
+      resetValues();
+    }
+  }, [selectedAsset]);
 
   const categories = [
     'Laptop',
@@ -28,24 +50,27 @@ function AssetDialog({ open, setOpen }) {
   ];
   const conditions = ['New', 'Used', 'Damaged', 'Disposed'];
 
+  function resetValues() {
+    setNewAsset({
+      category: '',
+      assetName: '',
+      serialNumber: '',
+      origin: '',
+      condition: '',
+      invoice: null,
+      owner: null,
+      actionType: '',
+      acknowledged: '',
+    });
+  }
+
   async function handleCreateAsset(e) {
     e.preventDefault();
     console.log(newAsset);
     try {
       const result = await createAsset(newAsset);
-      setNewAsset({
-        category: '',
-        assetName: '',
-        serialNumber: '',
-        origin: '',
-        condition: '',
-        invoice: null,
-        owner: null,
-        actionType: '',
-        acknowledged: '',
-      });
-
-      setOpen(false);
+      resetValues();
+      setOpenDialog(false);
     } catch (error) {
       console.log('Failed to create asset', error);
     }
@@ -57,7 +82,13 @@ function AssetDialog({ open, setOpen }) {
   }
 
   return (
-    <Dialog.Root open={open} onOpenChange={setOpen}>
+    <Dialog.Root
+      open={openDialog}
+      onOpenChange={() => {
+        if (!openDialog) resetValues();
+        setOpenDialog();
+      }}
+    >
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-black/20 z-50" />
         <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-xl p-6 w-full max-w-md z-50">
@@ -227,6 +258,7 @@ function AssetDialog({ open, setOpen }) {
               <button
                 className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
                 aria-label="Close"
+                onClick={resetValues}
               >
                 <IoCloseCircleOutline className="w-6 h-6" />
               </button>

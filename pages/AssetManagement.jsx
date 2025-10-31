@@ -9,8 +9,9 @@ import AssetDialog from '../components/AssetDialog';
 
 export default function AssetManagement({ assetData, fetchAssets }) {
   const [selectedRow, setSelectedRow] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
+  const [selectedAsset, setSelectedAsset] = useState([]);
+  const [isOpen, setIsOpen] = useState(false); // for peek panel
 
   return (
     <>
@@ -26,6 +27,7 @@ export default function AssetManagement({ assetData, fetchAssets }) {
           <button
             className="flex items-center gap-2 m-3 bg-slate-500 text-white font-medium px-4 py-2 rounded-xl shadow-sm hover:bg-[#a79d9a] transition-all duration-200 active:scale-95"
             onClick={() => {
+              setSelectedAsset(null)
               setOpenDialog(true);
             }}
           >
@@ -37,18 +39,24 @@ export default function AssetManagement({ assetData, fetchAssets }) {
       <AssetTable
         selectedRow={selectedRow}
         setSelectedRow={setSelectedRow}
-        sampleAssets={sampleAssets}
-        setIsOpen={setIsOpen}
+        // sampleAssets={sampleAssets}
         assetData={assetData}
+        openDialog={openDialog}
+        setOpenDialog={setOpenDialog}
+        setSelectedAsset={setSelectedAsset}
       />
 
-      <PeekPanel
+      {/* <PeekPanel
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         selectedAsset={selectedRow}
-      />
+      /> */}
 
-      <AssetDialog open={openDialog} setOpen={setOpenDialog} />
+      <AssetDialog
+        openDialog={openDialog}
+        setOpenDialog={setOpenDialog}
+        selectedAsset={selectedAsset}
+      />
     </>
   );
 }

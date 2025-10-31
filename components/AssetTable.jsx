@@ -6,8 +6,9 @@ function AssetTable({
   selectedRow,
   setSelectedRow,
   sampleAssets,
-  setIsOpen,
   assetData,
+  setOpenDialog,
+  setSelectedAsset,
 }) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -123,7 +124,10 @@ function AssetTable({
                       <button className="bg-red-400 p-1 rounded-lg text-white cursor-pointer">
                         <MdOutlineEdit
                           size={20}
-                          onClick={() => setIsOpen(true)}
+                          onClick={() => {
+                            setSelectedAsset(row);
+                            setOpenDialog(true);
+                          }}
                         />
                       </button>
                       <button className="bg-amber-400 p-1 rounded-lg text-white cursor-pointer">
