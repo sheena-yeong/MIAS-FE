@@ -9,22 +9,20 @@ import {
   Cell,
 } from 'recharts';
 
-function AssetCountChart({ assetData }) {
-  const categoryCount = assetData.reduce((acc, asset) => {
-    const category = asset.category;
-    if (acc[category]) {
-      acc[category] += 1;
+function AssetCountByStatus({ assetData }) {
+  const statusCount = assetData.reduce((acc, asset) => {
+    const status = asset.actionType;
+    if (acc[status]) {
+      acc[status] += 1;
     } else {
-      acc[category] = 1;
+      acc[status] = 1;
     }
     return acc;
   }, {});
 
-  const totalAssets = assetData.length;
-
-  const chartData = Object.keys(categoryCount).map((category) => ({
-    name: category,
-    value: categoryCount[category],
+  const chartData = Object.keys(statusCount).map((status) => ({
+    name: status,
+    value: statusCount[status],
   }));
 
   const COLORS = [
@@ -39,23 +37,19 @@ function AssetCountChart({ assetData }) {
   return (
     <>
       <div className="bg-white p-6 rounded-lg shadow">
-        <h3 className="text-end mr-4">Total Assets: {totalAssets}</h3>
-
-        <h3 className="text-xl font-semibold mb-4">
-          Count of Assets by Category
-        </h3>
+        <h3 className="text-xl font-semibold mb-4">Asset Count by Status</h3>
 
         <ResponsiveContainer width="100%" height={300}>
           <BarChart
             data={chartData}
-            margin={{ top: 10, right: 30, left: 0, bottom: 5 }}
+            layout="vertical"
+            margin={{ top: 10, right: 30, left: 50, bottom: 5 }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis allowDecimals={false} />
+            <XAxis type="number" allowDecimals={false} />
+            <YAxis type="category" dataKey="name" />
             <Tooltip />
-            <Bar dataKey="value" radius={[6, 6, 0, 0]}>
-              {/* Color the graph */}
+            <Bar dataKey="value" radius={[0, 6, 6, 0]}>
               {chartData.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
@@ -70,4 +64,4 @@ function AssetCountChart({ assetData }) {
   );
 }
 
-export default AssetCountChart;
+export default AssetCountByStatus;
