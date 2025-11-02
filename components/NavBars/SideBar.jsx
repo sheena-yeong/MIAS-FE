@@ -18,7 +18,7 @@ function SideBar({ isMenuCollapsed }) {
     {
       name: 'Dashboard',
       icon: <IoHomeSharp />,
-      path: '/dashboard',
+      path: '/',
       roles: ['Admin', 'Editor', 'Viewer'],
     },
     {
