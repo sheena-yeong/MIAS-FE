@@ -5,9 +5,9 @@ import { LuHistory } from 'react-icons/lu';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
-import miasLogo from '../assets/mias_logo.png';
-import miasLogoCollapsed from '../assets/mias_logo_collapsed.png';
-import avatarBoy from '../assets/avatar-sample-boy.png';
+import miasLogo from '../../assets/mias_logo.png';
+import miasLogoCollapsed from '../../assets/mias_logo_collapsed.png';
+import avatarBoy from '../../assets/avatar-sample-boy.png';
 
 function SideBar({ isMenuCollapsed }) {
   const navigate = useNavigate();
