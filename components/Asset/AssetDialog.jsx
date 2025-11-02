@@ -3,7 +3,12 @@ import { IoCloseCircleOutline } from 'react-icons/io5';
 import { useState, useEffect } from 'react';
 import { createAsset, updateAsset } from '../../services/asset';
 
-function AssetDialog({ openDialog, setOpenDialog, selectedAsset, fetchAssets }) {
+function AssetDialog({
+  openDialog,
+  setOpenDialog,
+  selectedAsset,
+  fetchAssets,
+}) {
   /* ========== useStates and useEffect ========== */
   const [isEditMode, setIsEditMode] = useState(false);
   const [newAsset, setNewAsset] = useState({
