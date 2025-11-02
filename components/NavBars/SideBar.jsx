@@ -1,9 +1,9 @@
-import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { IoHomeSharp, IoFolderOpen, IoPeopleSharp } from 'react-icons/io5';
 import { LuHistory } from 'react-icons/lu';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { useAuth } from '../../context/AuthContext';
 
 import miasLogo from '../../assets/mias_logo.png';
 import miasLogoCollapsed from '../../assets/mias_logo_collapsed.png';
@@ -12,13 +12,43 @@ import avatarBoy from '../../assets/avatar-sample-boy.png';
 function SideBar({ isMenuCollapsed }) {
   const navigate = useNavigate();
   const location = useLocation(); // grabs the current path from param
+  const { user, signOut } = useAuth();
 
-  const navItems = [
-    { name: 'Dashboard', icon: <IoHomeSharp />, path: '/dashboard' },
-    { name: 'Asset Management', icon: <IoFolderOpen />, path: '/assets' },
-    { name: 'User Management', icon: <IoPeopleSharp />, path: '/users' },
-    { name: 'Transactions', icon: <LuHistory />, path: '/transactions' },
+  const allNavItems = [
+    {
+      name: 'Dashboard',
+      icon: <IoHomeSharp />,
+      path: '/dashboard',
+      roles: ['Admin', 'Editor', 'Viewer'],
+    },
+    {
+      name: 'Asset Management',
+      icon: <IoFolderOpen />,
+      path: '/assets',
+      roles: ['Admin', 'Editor', 'Viewer'],
+    },
+    {
+      name: 'User Management',
+      icon: <IoPeopleSharp />,
+      path: '/users',
+      roles: ['Admin'],
+    },
+    {
+      name: 'Transactions',
+      icon: <LuHistory />,
+      path: '/transactions',
+      roles: ['Admin', 'Editor', 'Viewer'],
+    },
   ];
+
+  async function handleLogout() {
+    await signOut();
+    navigate('/sign-in');
+  }
+
+  const navItems = allNavItems.filter((item) =>
+    item.roles.includes(user?.role)
+  );
 
   return (
     <div
@@ -26,15 +56,14 @@ function SideBar({ isMenuCollapsed }) {
       ${isMenuCollapsed ? 'w-20' : 'w-64'}`}
     >
       <div className="flex flex-col items-start p-3 space-y-2 w-full">
-
         {/* Logo */}
         <div
           className={`flex w-full mt-3 ${
             isMenuCollapsed ? 'justify-center' : 'justify-start'
           } mb-8 h-15 items-center`}
         >
-          <img 
-            src={isMenuCollapsed ? miasLogoCollapsed : miasLogo} 
+          <img
+            src={isMenuCollapsed ? miasLogoCollapsed : miasLogo}
             className="h-full w-auto object-contain transition-all duration-300"
           />
         </div>
@@ -55,11 +84,9 @@ function SideBar({ isMenuCollapsed }) {
           ${isMenuCollapsed ? 'justify-center' : ''}`}
           >
             <span className="w-5 h-5">{item.icon}</span>
-            <span 
+            <span
               className={`whitespace-nowrap transition-all duration-300 overflow-hidden ${
-                isMenuCollapsed 
-                  ? 'opacity-0 w-0' 
-                  : 'opacity-100'
+                isMenuCollapsed ? 'opacity-0 w-0' : 'opacity-100'
               }`}
             >
               {item.name}
@@ -69,27 +96,27 @@ function SideBar({ isMenuCollapsed }) {
       </div>
 
       {/* Avatar Card */}
-      <div className={`flex items-center w-full transition-all duration-300 ${
-        isMenuCollapsed ? 'justify-center' : 'justify-between'
-      }`}>
+      <div
+        className={`flex items-center w-full transition-all duration-300 ${
+          isMenuCollapsed ? 'justify-center' : 'justify-between'
+        }`}
+      >
         <div className="flex items-center min-w-0">
           <img src={avatarBoy} className="w-10 m-5" />
-          <div 
+          <div
             className={`flex flex-col min-w-0 transition-all duration-300 overflow-hidden ${
-              isMenuCollapsed 
-                ? 'opacity-0 w-0' 
-                : 'opacity-100'
+              isMenuCollapsed ? 'opacity-0 w-0' : 'opacity-100'
             }`}
           >
-            <h1 className="whitespace-nowrap">Simon Ong</h1>
-            <h1 className="text-slate-400 whitespace-nowrap">Admin</h1>
+            <h1 className="whitespace-nowrap">{user.username}</h1>
+            <h1 className="text-slate-400 whitespace-nowrap">{user.role}</h1>
           </div>
         </div>
 
-        <div 
+        <div
           className={`pr-3 transition-all duration-300 ${
-            isMenuCollapsed 
-              ? 'opacity-0 w-0 overflow-hidden' 
+            isMenuCollapsed
+              ? 'opacity-0 w-0 overflow-hidden'
               : 'opacity-100 hover:scale-110'
           }`}
         >
@@ -100,12 +127,14 @@ function SideBar({ isMenuCollapsed }) {
 
             <DropdownMenu.Portal>
               <DropdownMenu.Content
-                className="bg-white text-black rounded-md shadow-lg p-2 m-2 min-w-[90px]"
+                className="bg-white text-black rounded-md shadow-lg p-2 my-5 mr-2 min-w-[90px]"
                 sideOffset={5}
                 align="end"
                 alignOffset={-10}
               >
-                <DropdownMenu.Item>Logout</DropdownMenu.Item>
+                <DropdownMenu.Item onClick={handleLogout}>
+                  Logout
+                </DropdownMenu.Item>
               </DropdownMenu.Content>
             </DropdownMenu.Portal>
           </DropdownMenu.Root>

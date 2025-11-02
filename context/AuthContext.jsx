@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
       setTokens({ access: data.access, refresh: data.refresh });
 
       const payload = JSON.parse(atob(data.access.split('.')[1]));
-      setUser({ _id: payload._id, eid: payload.eid, role: payload.role });
+      setUser({ _id: payload._id, username: payload.username, eid: payload.eid, role: payload.role });
 
       return { success: true };
     } catch (error) {
