@@ -34,10 +34,10 @@ async function signUp(userData) {
     const { data } = await axios.post(`${BASE_URL}/sign-up`, userData);
     return { success: true, message: data.message };
   } catch (error) {
-    console.error('SignUp Error Details:', error.response?.data); // ✅ Add this
+    console.error('SignUp Error Details:', error.response?.data);
     return { 
       success: false, 
-      error: error.response?.data || error.message  // ✅ Fix this
+      error: error.response?.data || error.message
     };
   }
 }
