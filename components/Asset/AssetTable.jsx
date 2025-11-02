@@ -4,6 +4,7 @@ import AssetDeleteAlert from './AssetDeleteAlert.jsx';
 import { deleteAsset } from '../../services/asset.js';
 import { LuUserPlus } from 'react-icons/lu';
 import { useState } from 'react';
+import { useAuth } from '../../context/AuthContext.jsx';
 
 function AssetTable({
   selectedRow,
@@ -15,6 +16,7 @@ function AssetTable({
   setSelectedAsset,
   fetchAssets,
 }) {
+  const { tokens } = useAuth();
   const [openAlert, setOpenAlert] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -51,7 +53,7 @@ function AssetTable({
   }
 
   function handleDelete() {
-    deleteAsset(selectedAsset._id);
+    deleteAsset(selectedAsset._id, tokens.access);
     setOpenAlert(false);
     fetchAssets();
   }

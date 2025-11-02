@@ -2,6 +2,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { IoCloseCircleOutline } from 'react-icons/io5';
 import { useState, useEffect } from 'react';
 import { createAsset, updateAsset } from '../../services/asset';
+import { useAuth } from '../../context/AuthContext';
 
 function AssetDialog({
   openDialog,
@@ -10,6 +11,7 @@ function AssetDialog({
   fetchAssets,
 }) {
   /* ========== useStates and useEffect ========== */
+  const { tokens } = useAuth();
   const [isEditMode, setIsEditMode] = useState(false);
   const [newAsset, setNewAsset] = useState({
     category: '',
@@ -75,7 +77,7 @@ function AssetDialog({
   async function handleCreateAsset(e) {
     e.preventDefault();
     try {
-      const result = await createAsset(newAsset);
+      const result = await createAsset(newAsset, tokens.access);
       resetValues();
       setOpenDialog(false);
       fetchAssets();
@@ -88,7 +90,7 @@ function AssetDialog({
   async function handleUpdateAsset(e) {
     e.preventDefault();
     try {
-      const result = await updateAsset(newAsset, selectedAsset._id);
+      const result = await updateAsset(newAsset, selectedAsset._id, tokens.access);
       resetValues();
       setOpenDialog(false);
       fetchAssets();
