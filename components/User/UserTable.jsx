@@ -1,4 +1,4 @@
-function UserTable({ selectedRow, setSelectedRow, sampleData }) {
+function UserTable({ selectedRow, setSelectedRow, sampleUsers }) {
   return (
     <div className="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
       <table className="min-w-full divide-y divide-gray-200">
@@ -16,7 +16,7 @@ function UserTable({ selectedRow, setSelectedRow, sampleData }) {
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200">
-          {sampleData.map((row, idx) => {
+          {sampleUsers.map((row, idx) => {
             const isSelected = selectedRow === idx;
             return (
               <tr

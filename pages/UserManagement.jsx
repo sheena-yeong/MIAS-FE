@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { sampleData } from '../data/sampledata';
+import { sampleUsers } from '../data/sampleUsers';
 import UserTable from '../components/User/UserTable';
 
 export default function UserManagement() {
@@ -12,7 +12,7 @@ export default function UserManagement() {
       <UserTable
         selectedRow={selectedRow}
         setSelectedRow={setSelectedRow}
-        sampleData={sampleData}
+        sampleUsers={sampleUsers}
       />
     </>
   );
