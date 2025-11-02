@@ -22,6 +22,7 @@ function App() {
   async function fetchAssets() {
     try {
       const data = await getAllAssets(tokens.access);
+      console.log(data);
       if (data) setAssetData(data);
     } catch (error) {
       console.log('Error fetching asset data from BE:', error);
@@ -81,7 +82,7 @@ function App() {
                       />
 
                       {/* Editor and Viewer Access */}
-                      <Route path="/" element={<Dashboard />} />
+                      <Route path="/" element={<Dashboard assetData={assetData}/>} />
                       <Route
                         path="/assets"
                         element={
