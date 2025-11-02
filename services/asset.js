@@ -1,9 +1,14 @@
 import axios from 'axios';
+
 const BASE_URL = 'http://localhost:3000';
 
-export const getAllAssets = async () => {
+export const getAllAssets = async (token) => {
   try {
-    const res = await axios.get(`${BASE_URL}/assets`);
+    const res = await axios.get(`${BASE_URL}/assets`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return res.data;
   } catch (error) {
     console.log(`Error in fetching assets: ${error.message}`);
@@ -11,27 +16,39 @@ export const getAllAssets = async () => {
   }
 };
 
-export const createAsset = async (newAsset) => {
+export const createAsset = async (newAsset, token) => {
   try {
-    const res = await axios.post(`${BASE_URL}/assets`, newAsset);
+    const res = await axios.post(`${BASE_URL}/assets`, newAsset, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return res.data;
   } catch (error) {
     console.log(`Error in creating asset: ${error.message}`);
   }
 };
 
-export const updateAsset = async (updatedAsset, assetId) => {
+export const updateAsset = async (updatedAsset, assetId, token) => {
   try {
-    const res = await axios.put(`${BASE_URL}/assets/${assetId}`, updatedAsset);
+    const res = await axios.put(`${BASE_URL}/assets/${assetId}`, updatedAsset, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return res.data;
   } catch (error) {
     console.log(`Error in updating asset: ${error.message}`);
   }
 };
 
-export const deleteAsset = async (assetId) => {
+export const deleteAsset = async (assetId, token) => {
   try {
-    const res = await axios.delete(`${BASE_URL}/assets/${assetId}`);
+    const res = await axios.delete(`${BASE_URL}/assets/${assetId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return res.data;
   } catch (error) {
     console.log(`Error in deleting asset: ${error.message}`);
