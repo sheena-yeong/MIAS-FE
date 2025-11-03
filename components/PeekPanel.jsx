@@ -14,7 +14,7 @@ function PeekPanel({ openPanel, onClose, selectedAsset }) {
       )}
 
       {/* Panel */}
-      <div
+      {selectedAsset && <div
         className={`fixed top-0 right-0 h-full w-96 bg-white shadow-xl transform transition-transform duration-300 z-50
         ${openPanel ? 'translate-x-0' : 'translate-x-full'}`}
       >
@@ -62,7 +62,7 @@ function PeekPanel({ openPanel, onClose, selectedAsset }) {
             <p className="text-gray-500">No asset selected</p>
           )}
         </div>
-      </div>
+      </div>}
     </>
   );
 }
