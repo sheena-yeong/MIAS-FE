@@ -42,7 +42,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-800 flex-col">
+    <div className="grid-bg min-h-screen flex items-center justify-center bg-slate-800 flex-col">
       <img src={miasLogo} className="w-80 pb-5" />
       <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow">
         <div>
@@ -130,7 +130,7 @@ const SignUp = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#ff3a3a] hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
             >
               {loading ? 'Creating account...' : 'Sign Up'}
             </button>
