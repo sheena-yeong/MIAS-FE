@@ -1,8 +1,7 @@
 import { IoClose, IoPerson } from 'react-icons/io5';
 import { FaRegComments, FaWarehouse } from 'react-icons/fa6';
 
-
-function PeekPanel({ openPanel, onClose, selectedAsset }) {
+function CommentsPanel({ openPanel, onClose, selectedAsset }) {
   return (
     <>
       {/* Overlay */}
@@ -55,7 +54,7 @@ function PeekPanel({ openPanel, onClose, selectedAsset }) {
                   <FaRegComments />
                   Comments:
                 </label>
-                <p className="font-medium">{selectedAsset.comments}</p>
+                <p className="font-medium">(Todo: To map comments here)</p>
               </div>
             </div>
           ) : (
@@ -67,4 +66,4 @@ function PeekPanel({ openPanel, onClose, selectedAsset }) {
   );
 }
 
-export default PeekPanel;
+export default CommentsPanel;

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { IoIosAddCircle } from 'react-icons/io';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import AssetTable from '../components/Asset/AssetTable';
-import PeekPanel from '../components/PeekPanel';
+import CommentsPanel from '../components/Asset/CommentsPanel';
 import AssetDialog from '../components/Asset/AssetDialog';
 
 export default function AssetManagement({ assetData, fetchAssets }) {
@@ -91,7 +91,7 @@ export default function AssetManagement({ assetData, fetchAssets }) {
         setOpenPanel={setOpenPanel}
       />
 
-      <PeekPanel
+      <CommentsPanel
         openPanel={openPanel}
         onClose={() => {
           setOpenPanel(false);
