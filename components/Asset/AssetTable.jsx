@@ -107,7 +107,7 @@ function AssetTable({
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {assetData.map((row, idx) => {
+            {currentAssets.map((row, idx) => {
               const isSelected = selectedRow === idx;
               return (
                 <tr
