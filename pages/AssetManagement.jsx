@@ -11,7 +11,7 @@ export default function AssetManagement({ assetData, fetchAssets }) {
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedAsset, setSelectedAsset] = useState(null);
   const [tableData, setTableData] = useState(assetData);
-  const [isOpen, setIsOpen] = useState(false); // for peek panel
+  const [openPanel, setOpenPanel] = useState(false);
 
   const filterItems = ['Available Assets', 'Assets on Loan', 'Condition: New'];
   const [filter, setFilter] = useState(null);
@@ -67,7 +67,7 @@ export default function AssetManagement({ assetData, fetchAssets }) {
             className="transition-transform duration-200 hover:rotate-45"
           />
           <button
-            className="flex items-center gap-2 m-3 bg-slate-500 text-white font-medium px-4 py-2 rounded-xl shadow-sm hover:bg-[#a79d9a] transition-all duration-200 active:scale-95"
+            className="flex items-center gap-2 m-3 bg-slate-500 text-white font-medium px-4 py-2 rounded-xl shadow-sm hover:bg-red-400 transition-all duration-200 active:scale-95"
             onClick={() => {
               setSelectedAsset(null);
               setOpenDialog(true);
@@ -88,13 +88,17 @@ export default function AssetManagement({ assetData, fetchAssets }) {
         selectedAsset={selectedAsset}
         setSelectedAsset={setSelectedAsset}
         fetchAssets={fetchAssets}
+        setOpenPanel={setOpenPanel}
       />
 
-      {/* <PeekPanel
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        selectedAsset={selectedRow}
-      /> */}
+      <PeekPanel
+        openPanel={openPanel}
+        onClose={() => {
+          setOpenPanel(false);
+          setSelectedRow(null);
+        }}
+        selectedAsset={selectedAsset}
+      />
 
       <AssetDialog
         openDialog={openDialog}

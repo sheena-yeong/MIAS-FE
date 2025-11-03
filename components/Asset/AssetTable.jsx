@@ -15,6 +15,7 @@ function AssetTable({
   selectedAsset,
   setSelectedAsset,
   fetchAssets,
+  setOpenPanel,
 }) {
   const { tokens } = useAuth();
   const [openAlert, setOpenAlert] = useState(false);
@@ -154,7 +155,13 @@ function AssetTable({
                           }}
                         />
                       </button>
-                      <button className="bg-yellow-500 p-1 rounded-lg text-white cursor-pointer">
+                      <button
+                        className="bg-yellow-500 p-1 rounded-lg text-white cursor-pointer"
+                        onClick={() => {
+                          setOpenPanel(true);
+                          setSelectedAsset(row);
+                        }}
+                      >
                         <FaRegComments size={20} />
                       </button>
                       <button className="bg-red-400 p-1 rounded-lg text-white cursor-pointer">
