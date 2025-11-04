@@ -24,24 +24,3 @@ body {
     background-position: 100px 100px, 100px 100px;
   }
 }
-
-.data-grid-bg {
-  background-color: #1d1d1d;
-  background-image: 
-    linear-gradient(rgba(255, 221, 221, 0.632) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 218, 218, 0.669) 1px, transparent 1px);
-  background-size: 60px 60px;
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  animation: gridFlow 25s linear infinite;
-}
-
-@keyframes gridFlow {
-  0% {
-    background-position: 0 0, 0 0;
-  }
-  100% {
-    background-position: 120px 120px, 120px 120px;
-  }
-}

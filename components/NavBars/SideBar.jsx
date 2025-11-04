@@ -4,7 +4,7 @@ import { LuHistory } from 'react-icons/lu';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { useAuth } from '../../context/AuthContext';
-
+import { FaFileInvoiceDollar } from "react-icons/fa6";
 import miasLogo from '../../assets/mias_logo.png';
 import miasLogoCollapsed from '../../assets/mias_logo_collapsed.png';
 import avatarBoy from '../../assets/avatar-sample-boy.png';
@@ -32,6 +32,12 @@ function SideBar({ isMenuCollapsed }) {
       icon: <IoPeopleSharp />,
       path: '/users',
       roles: ['Admin'],
+    },
+    {
+      name: 'Invoice Management',
+      icon: <FaFileInvoiceDollar />,
+      path: '/invoices',
+      roles: ['Admin', 'Editor'],
     },
     {
       name: 'Transactions',

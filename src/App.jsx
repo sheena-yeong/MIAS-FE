@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext.jsx';
 import SideBar from '../components/NavBars/SideBar.jsx';
 import TopNavBar from '../components/NavBars/TopNavBar.jsx';
 import Dashboard from '../pages/Dashboard.jsx';
+import InvoiceManagement from '../pages/InvoiceManagement.jsx';
 import AssetManagement from '../pages/AssetManagement.jsx';
 import UserManagement from '../pages/UserManagement.jsx';
 import Settings from '../pages/Settings.jsx';
@@ -93,6 +94,7 @@ function App() {
                         }
                       />
 
+                        <Route path="/invoices" element={<InvoiceManagement />}/>
                       <Route path="/transactions" element={<Transactions />} />
                       <Route path="/settings" element={<Settings />} />
                       <Route path="*" element={<Navigate to="/" replace />} />
