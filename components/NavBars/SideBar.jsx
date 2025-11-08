@@ -1,11 +1,10 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { IoHomeSharp, IoFolderOpen, IoPeopleSharp } from 'react-icons/io5';
-import { RiFolderUserFill } from "react-icons/ri";
 import { LuHistory } from 'react-icons/lu';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { useAuth } from '../../context/AuthContext';
-import { FaFileInvoiceDollar } from "react-icons/fa6";
+import { FaFileInvoiceDollar, FaUserGear } from "react-icons/fa6";
 import miasLogo from '../../assets/mias_logo.png';
 import miasLogoCollapsed from '../../assets/mias_logo_collapsed.png';
 import avatarBoy from '../../assets/avatar-sample-boy.png';
@@ -29,16 +28,24 @@ function SideBar({ isMenuCollapsed }) {
       roles: ['Admin', 'Editor', 'Viewer'],
     },
     {
-      name: 'Associate Management',
-      icon: <RiFolderUserFill />,
-      path: '/associates',
-      roles: ['Admin', 'Editor'],
-    },    
-    {
       name: 'User Management',
-      icon: <IoPeopleSharp />,
+      icon: <FaUserGear />,
       path: '/users',
-      roles: ['Admin'],
+      roles: ['Admin', 'Editor'],
+      subItems: [
+        {
+          name: 'Associates',
+          icon: <IoPeopleSharp />,
+          path: '/associates',
+          roles: ['Admin', 'Editor'],
+        },
+        {
+          name: 'Team',
+          icon: <IoPeopleSharp />,
+          path: '/teams',
+          roles: ['Admin'],
+        },
+      ],
     },
     {
       name: 'Invoice Management',
