@@ -1,23 +1,27 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { useAuth } from '../context/AuthContext.jsx';
-import SideBar from '../components/NavBars/SideBar.jsx';
-import TopNavBar from '../components/NavBars/TopNavBar.jsx';
-import Dashboard from '../pages/Dashboard.jsx';
-import InvoiceManagement from '../pages/InvoiceManagement.jsx';
-import AssetManagement from '../pages/AssetManagement.jsx';
-import UserManagement from '../pages/UserManagement.jsx';
-import Settings from '../pages/Settings.jsx';
-import Transactions from '../pages/Transactions.jsx';
-import SignIn from '../components/Login/SignIn.jsx';
-import SignUp from '../components/Login/SignUp.jsx';
-import ProtectedRoute from '../components/Routes/ProtectedRoute.jsx';
-import RoleProtectedRoute from '../components/Routes/RoleProtectedRoute.jsx';
-import { getAllAssets } from '../services/asset.js';
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useAuth } from "../context/AuthContext.jsx";
+import SideBar from "../components/NavBars/SideBar.jsx";
+import TopNavBar from "../components/NavBars/TopNavBar.jsx";
+import Dashboard from "../pages/Dashboard.jsx";
+import InvoiceManagement from "../pages/InvoiceManagement.jsx";
+import AssetManagement from "../pages/AssetManagement.jsx";
+import AssociateManagement from "../pages/AssociateManagement.jsx";
+import UserManagement from "../pages/UserManagement.jsx";
+import Settings from "../pages/Settings.jsx";
+import Transactions from "../pages/Transactions.jsx";
+import SignIn from "../components/Login/SignIn.jsx";
+import SignUp from "../components/Login/SignUp.jsx";
+import ProtectedRoute from "../components/Routes/ProtectedRoute.jsx";
+import RoleProtectedRoute from "../components/Routes/RoleProtectedRoute.jsx";
+import { getAllAssets } from "../services/asset.js";
+import { getAllInvoices } from "../services/invoice.js";
+import { getAllTransactions } from '../services/transaction.js';
 
 function App() {
   const [isMenuCollapsed, setIsMenuCollapsed] = useState(false);
   const [assetData, setAssetData] = useState([]);
+  const [invoiceData, setInvoiceData] = useState([]);
   const { isAuthenticated, loading, tokens } = useAuth();
 
   async function fetchAssets() {
@@ -26,12 +30,35 @@ function App() {
       console.log(data);
       if (data) setAssetData(data);
     } catch (error) {
-      console.log('Error fetching asset data from BE:', error);
+      console.log("Error fetching asset data from BE:", error);
+    }
+  }
+
+  async function fetchInvoices() {
+    try {
+      const data = await getAllInvoices(tokens.access);
+      console.log(data);
+      if (data) setInvoiceData(data);
+    } catch (error) {
+      console.log("Error fetching invoice data from BE:", error);
+    }
+  }
+
+  async function fetchTransactions() {
+    try {
+      const data = await getAllTransactions(tokens.access);
+      console.log('transactions', data);
+    } catch (error) {
+      console.log('Error fetching transaction data from BE:', error);
     }
   }
 
   useEffect(() => {
-    if (isAuthenticated) fetchAssets();
+    if (isAuthenticated) {
+      fetchAssets();
+      fetchInvoices();
+      fetchTransactions();
+    }
   }, [isAuthenticated]);
 
   if (loading) {
@@ -76,14 +103,17 @@ function App() {
                       <Route
                         path="/users"
                         element={
-                          <RoleProtectedRoute allowedRoles={['Admin']}>
+                          <RoleProtectedRoute allowedRoles={["Admin"]}>
                             <UserManagement />
                           </RoleProtectedRoute>
                         }
                       />
 
                       {/* Editor and Viewer Access */}
-                      <Route path="/" element={<Dashboard assetData={assetData}/>} />
+                      <Route
+                        path="/"
+                        element={<Dashboard assetData={assetData} />}
+                      />
                       <Route
                         path="/assets"
                         element={
@@ -93,8 +123,19 @@ function App() {
                           />
                         }
                       />
-
-                        <Route path="/invoices" element={<InvoiceManagement />}/>
+                      <Route 
+                        path="/associates"
+                        element={<AssociateManagement />}
+                      />
+                      <Route
+                        path="/invoices"
+                        element={
+                          <InvoiceManagement
+                            invoiceData={invoiceData}
+                            fetchInvoices={fetchInvoices}
+                          />
+                        }
+                      />
                       <Route path="/transactions" element={<Transactions />} />
                       <Route path="/settings" element={<Settings />} />
                       <Route path="*" element={<Navigate to="/" replace />} />
