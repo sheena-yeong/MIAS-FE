@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { IoHomeSharp, IoFolderOpen, IoPeopleSharp } from 'react-icons/io5';
+import { RiFolderUserFill } from "react-icons/ri";
 import { LuHistory } from 'react-icons/lu';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
@@ -28,6 +29,12 @@ function SideBar({ isMenuCollapsed }) {
       roles: ['Admin', 'Editor', 'Viewer'],
     },
     {
+      name: 'Associate Management',
+      icon: <RiFolderUserFill />,
+      path: '/associates',
+      roles: ['Admin', 'Editor'],
+    },    
+    {
       name: 'User Management',
       icon: <IoPeopleSharp />,
       path: '/users',
@@ -43,7 +50,7 @@ function SideBar({ isMenuCollapsed }) {
       name: 'Transactions',
       icon: <LuHistory />,
       path: '/transactions',
-      roles: ['Admin', 'Editor', 'Viewer'],
+      roles: ['Admin', 'Editor'],
     },
   ];
 
@@ -59,7 +66,7 @@ function SideBar({ isMenuCollapsed }) {
   return (
     <div
       className={`flex flex-col justify-between h-full transition-all duration-300 items-start
-      ${isMenuCollapsed ? 'w-20' : 'w-64'}`}
+      ${isMenuCollapsed ? 'w-20' : 'w-75'}`}
     >
       <div className="flex flex-col items-start p-3 space-y-2 w-full">
         {/* Logo */}
