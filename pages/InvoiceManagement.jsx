@@ -1,9 +1,11 @@
-import React from 'react'
+import InvoiceTable from '../components/Invoice/InvoiceTable'
 
-function InvoiceManagement() {
+export default function InvoiceManagement({ invoiceData, fetchInvoices }) {
   return (
-    <div>InvoiceManagement</div>
+    <>
+      <h3 className="p-3 text-3xl font-semibold mt-4 ml-2">Invoice Management</h3>
+
+      <InvoiceTable />
+    </>
   )
 }
-
-export default InvoiceManagement
