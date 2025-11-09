@@ -73,6 +73,8 @@ export default function InvoiceManagement({ invoiceData, fetchInvoices }) {
         selectedRow={selectedRow}
         setSelectedRow={setSelectedRow}
         invoiceData={tableData}
+        openDialog={openDialog}
+        setOpenDialog={setOpenDialog}
         selectedInvoice={selectedInvoice}
         setSelectedInvoice={setSelectedInvoice}
         fetchInvoices={fetchInvoices}

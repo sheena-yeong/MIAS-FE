@@ -6,6 +6,8 @@ function InvoiceTable({
   selectedRow,
   setSelectedRow,
   invoiceData,
+  openDialog,
+  setOpenDialog,
   selectedInvoice,
   setSelectedInvoice,
   fetchInvoices,
@@ -111,6 +113,7 @@ function InvoiceTable({
                           size={20}
                           onClick={() => {
                             setSelectedInvoice(row);
+                            setOpenDialog(true);
                           }}
                         />
                       </button>
