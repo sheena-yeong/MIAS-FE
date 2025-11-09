@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import { IoIosAddCircle } from 'react-icons/io';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import InvoiceTable from '../components/Invoice/InvoiceTable';
+import InvoiceDialog from '../components/Invoice/InvoiceDialog';
 
 export default function InvoiceManagement({ invoiceData, fetchInvoices }) {
   const [selectedRow, setSelectedRow] = useState(null);
+  const [openDialog, setOpenDialog] = useState(false);
   const [selectedInvoice, setSelectedInvoice] = useState(null);
   const [tableData, setTableData] = useState(invoiceData);
 
@@ -59,6 +61,7 @@ export default function InvoiceManagement({ invoiceData, fetchInvoices }) {
             className="flex items-center gap-2 m-3 bg-slate-500 text-white font-medium px-4 py-2 rounded-xl shadow-sm hover:bg-red-400 transition-all duration-200 active:scale-95"
             onClick={() => {
               setSelectedInvoice(null);
+              setOpenDialog(true);
             }}
           >
             <IoIosAddCircle />
@@ -74,6 +77,12 @@ export default function InvoiceManagement({ invoiceData, fetchInvoices }) {
         setSelectedInvoice={setSelectedInvoice}
         fetchInvoices={fetchInvoices}
       />
+      <InvoiceDialog 
+        openDialog={openDialog}
+        setOpenDialog={setOpenDialog}
+        selectedInvoice={selectedInvoice}
+        fetchInvoices={fetchInvoices}
+      />
     </>
-  )
+  );
 }
