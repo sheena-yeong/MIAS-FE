@@ -74,10 +74,10 @@ function TransactionTable({ transactionData, selectedRow, setSelectedRow }) {
                     {row.action}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-800">
-                    {row.asset.assetName || "-"}
+                    {row.asset && row.asset.assetName ? row.asset.assetName : "-"}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-800">
-                    {row.performedBy.name || "-"}
+                    {row.performedBy && row.performedBy.name ? row.performedBy.name : "-"}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-800">
                     {new Date(row.createdAt).toLocaleString()}
