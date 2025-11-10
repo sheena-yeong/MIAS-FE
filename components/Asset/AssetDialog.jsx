@@ -9,6 +9,7 @@ function AssetDialog({
   setOpenDialog,
   selectedAsset,
   fetchAssets,
+  fetchTransactions,
 }) {
   /* ========== useStates and useEffect ========== */
   const { tokens } = useAuth();
@@ -81,6 +82,7 @@ function AssetDialog({
       resetValues();
       setOpenDialog(false);
       fetchAssets();
+      fetchTransactions();
       console.log('Asset created:', result);
     } catch (error) {
       console.log('Failed to create asset', error);
@@ -94,6 +96,7 @@ function AssetDialog({
       resetValues();
       setOpenDialog(false);
       fetchAssets();
+      fetchTransactions();
       console.log('Asset updated:', result);
     } catch (error) {
       console.log('Failed to update asset', error);

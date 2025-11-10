@@ -122,6 +122,7 @@ function App() {
                           <AssetManagement
                             assetData={assetData}
                             fetchAssets={fetchAssets}
+                            fetchTransactions={fetchTransactions}
                           />
                         }
                       />
@@ -143,7 +144,6 @@ function App() {
                         element={
                           <Transactions 
                             transactionData={transactionData}
-                            fetchTransactions={fetchTransactions}
                           />
                         } 
                       />

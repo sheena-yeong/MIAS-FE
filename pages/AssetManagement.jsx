@@ -6,7 +6,7 @@ import AssetTable from '../components/Asset/AssetTable';
 import CommentsPanel from '../components/Asset/CommentsPanel';
 import AssetDialog from '../components/Asset/AssetDialog';
 
-export default function AssetManagement({ assetData, fetchAssets }) {
+export default function AssetManagement({ assetData, fetchAssets, fetchTransactions }) {
   const [selectedRow, setSelectedRow] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedAsset, setSelectedAsset] = useState(null);
@@ -105,6 +105,7 @@ export default function AssetManagement({ assetData, fetchAssets }) {
         setOpenDialog={setOpenDialog}
         selectedAsset={selectedAsset}
         fetchAssets={fetchAssets}
+        fetchTransactions={fetchTransactions}
       />
     </>
   );
