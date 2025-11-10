@@ -22,6 +22,7 @@ function App() {
   const [isMenuCollapsed, setIsMenuCollapsed] = useState(false);
   const [assetData, setAssetData] = useState([]);
   const [invoiceData, setInvoiceData] = useState([]);
+  const [transactionData, setTransactionData] = useState([]);
   const { isAuthenticated, loading, tokens } = useAuth();
 
   async function fetchAssets() {
@@ -47,7 +48,8 @@ function App() {
   async function fetchTransactions() {
     try {
       const data = await getAllTransactions(tokens.access);
-      console.log('transactions', data);
+      console.log(data);
+      if (data) setTransactionData(data);
     } catch (error) {
       console.log('Error fetching transaction data from BE:', error);
     }
@@ -136,7 +138,15 @@ function App() {
                           />
                         }
                       />
-                      <Route path="/transactions" element={<Transactions />} />
+                      <Route 
+                        path="/transactions" 
+                        element={
+                          <Transactions 
+                            transactionData={transactionData}
+                            fetchTransactions={fetchTransactions}
+                          />
+                        } 
+                      />
                       <Route path="/settings" element={<Settings />} />
                       <Route path="*" element={<Navigate to="/" replace />} />
                     </Routes>
