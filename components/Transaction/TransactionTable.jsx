@@ -119,7 +119,91 @@ function TransactionTable({ transactionData, selectedRow, setSelectedRow }) {
           </tbody>
         </table>
       </div>
-    </div>
+
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-between mt-4 px-4">
+          <div className="text-sm text-gray-600">
+            Showing {startIndex + 1} to {Math.min(endIndex, transactionData.length)}{' '}
+            of {transactionData.length} transactions
+          </div>
+
+          <div className="flex gap-2">
+            {/* Previous Button */}
+            <button
+              onClick={() => goToPage(currentPage - 1)}
+              disabled={currentPage === 1}
+              className={`px-3 py-1 rounded border ${
+                currentPage === 1
+                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                  : 'bg-white text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              Previous
+            </button>
+
+            {/* First page if not visible */}
+            {getPageNumbers()[0] > 1 && (
+              <>
+                <button
+                  onClick={() => goToPage(1)}
+                  className="px-3 py-1 rounded border bg-white text-gray-700 hover:bg-gray-50"
+                >
+                  1
+                </button>
+                {getPageNumbers()[0] > 2 && (
+                  <span className="px-2 py-1 text-gray-500">...</span>
+                )}
+              </>
+            )}
+
+            {/* Page Numbers */}
+            {getPageNumbers().map((page) => (
+              <button
+                key={page}
+                onClick={() => goToPage(page)}
+                className={`px-3 py-1 rounded border ${
+                  currentPage === page
+                    ? 'bg-black text-white'
+                    : 'bg-white text-gray-700 hover:bg-gray-50'
+                }`}
+              >
+                {page}
+              </button>
+            ))}
+
+            {/* Last page if not visible */}
+            {getPageNumbers()[getPageNumbers().length - 1] < totalPages && (
+              <>
+                {getPageNumbers()[getPageNumbers().length - 1] <
+                  totalPages - 1 && (
+                  <span className="px-2 py-1 text-gray-500">...</span>
+                )}
+                <button
+                  onClick={() => goToPage(totalPages)}
+                  className="px-3 py-1 rounded border bg-white text-gray-700 hover:bg-gray-50"
+                >
+                  {totalPages}
+                </button>
+              </>
+            )}
+
+            {/* Next Button */}
+            <button
+              onClick={() => goToPage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className={`px-3 py-1 rounded border ${
+                currentPage === totalPages
+                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                  : 'bg-white text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      )}
+    </div>    
   );
 }
 
