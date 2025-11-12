@@ -29,7 +29,7 @@ const SignIn = () => {
 
   return (
     <div className="grid-bg min-h-screen flex items-center justify-center bg-slate-800 flex-col">
-      <img src={miasLogo} className="w-80 pb-5"/>
+      <img src={miasLogo} alt="MIAS Logo" className="w-80 pb-5"/>
       <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow">
         <div>
           <h2 className="text-center text-3xl font-bold text-gray-900">

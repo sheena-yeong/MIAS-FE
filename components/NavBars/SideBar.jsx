@@ -84,6 +84,7 @@ function SideBar({ isMenuCollapsed }) {
         >
           <img
             src={isMenuCollapsed ? miasLogoCollapsed : miasLogo}
+            alt="MIAS Logo"
             className="h-full w-auto object-contain transition-all duration-300"
           />
         </div>
