@@ -1,22 +1,22 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useAuth } from "../context/AuthContext.jsx";
-import SideBar from "../components/NavBars/SideBar.jsx";
-import TopNavBar from "../components/NavBars/TopNavBar.jsx";
-import Dashboard from "../pages/Dashboard.jsx";
-import InvoiceManagement from "../pages/InvoiceManagement.jsx";
-import AssetManagement from "../pages/AssetManagement.jsx";
-import AssociateManagement from "../pages/AssociateManagement.jsx";
-import UserManagement from "../pages/UserManagement.jsx";
-import Settings from "../pages/Settings.jsx";
-import Transactions from "../pages/Transactions.jsx";
-import SignIn from "../components/Login/SignIn.jsx";
-import SignUp from "../components/Login/SignUp.jsx";
-import ProtectedRoute from "../components/Routes/ProtectedRoute.jsx";
-import RoleProtectedRoute from "../components/Routes/RoleProtectedRoute.jsx";
-import { getAllAssets } from "../services/asset.js";
-import { getAllInvoices } from "../services/invoice.js";
-import { getAllTransactions } from '../services/transaction.js';
+import { useAuth } from "./context/AuthContext.jsx";
+import SideBar from "./components/NavBars/SideBar.jsx";
+import TopNavBar from "./components/NavBars/TopNavBar.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
+import InvoiceManagement from "./pages/InvoiceManagement.jsx";
+import AssetManagement from "./pages/AssetManagement.jsx";
+import AssociateManagement from "./pages/AssociateManagement.jsx";
+import UserManagement from "./pages/UserManagement.jsx";
+import Settings from "./pages/Settings.jsx";
+import Transactions from "./pages/Transactions.jsx";
+import SignIn from "./components/Login/SignIn.jsx";
+import SignUp from "./components/Login/SignUp.jsx";
+import ProtectedRoute from "./components/Routes/ProtectedRoute.jsx";
+import RoleProtectedRoute from "./components/Routes/RoleProtectedRoute.jsx";
+import { getAllAssets } from "./services/asset.js";
+import { getAllInvoices } from "./services/invoice.js";
+import { getAllTransactions } from "./services/transaction.js";
 
 function App() {
   const [isMenuCollapsed, setIsMenuCollapsed] = useState(false);
@@ -51,7 +51,7 @@ function App() {
       console.log(data);
       if (data) setTransactionData(data);
     } catch (error) {
-      console.log('Error fetching transaction data from BE:', error);
+      console.log("Error fetching transaction data from BE:", error);
     }
   }
 
@@ -126,7 +126,7 @@ function App() {
                           />
                         }
                       />
-                      <Route 
+                      <Route
                         path="/associates"
                         element={<AssociateManagement />}
                       />
@@ -139,13 +139,11 @@ function App() {
                           />
                         }
                       />
-                      <Route 
-                        path="/transactions" 
+                      <Route
+                        path="/transactions"
                         element={
-                          <Transactions 
-                            transactionData={transactionData}
-                          />
-                        } 
+                          <Transactions transactionData={transactionData} />
+                        }
                       />
                       <Route path="/settings" element={<Settings />} />
                       <Route path="*" element={<Navigate to="/" replace />} />
