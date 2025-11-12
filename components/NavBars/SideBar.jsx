@@ -123,7 +123,7 @@ function SideBar({ isMenuCollapsed }) {
         }`}
       >
         <div className="flex items-center min-w-0">
-          <img src={avatarBoy} className="w-10 m-5" />
+          <img src={avatarBoy} alt="Profile Picture" className="w-10 m-5" />
           <div
             className={`flex flex-col min-w-0 transition-all duration-300 overflow-hidden ${
               isMenuCollapsed ? 'opacity-0 w-0' : 'opacity-100'
