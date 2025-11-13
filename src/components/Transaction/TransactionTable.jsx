@@ -50,6 +50,9 @@ function TransactionTable({ transactionData, selectedRow, setSelectedRow }) {
                 Asset
               </th>
               <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
+                Serial Number
+              </th>              
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
                 Performed By
               </th>
               <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
@@ -74,12 +77,15 @@ function TransactionTable({ transactionData, selectedRow, setSelectedRow }) {
                     {row.action}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-800">
-                    {row.asset && row.asset.assetName ? row.asset.assetName : "-"}
+                    {row.asset.assetName ? row.asset.assetName : "-"}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-800">
-                    {row.performedBy && row.performedBy.name ? row.performedBy.name : "-"}
+                    {row.asset.serialNumber ? row.asset.serialNumber : "-"}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-800">
+                    {row.performedBy.username ? row.performedBy.username : "-"}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-g ray-800">
                     {new Date(row.createdAt).toLocaleString()}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-800">
@@ -93,7 +99,12 @@ function TransactionTable({ transactionData, selectedRow, setSelectedRow }) {
                           ) {
                             return (
                               <div key={key}>
-                                <span className="text-sm text-gray-800">{`${key.charAt(0).toUpperCase()}${key.slice(1)}`}:</span>{" "}
+                                <span className="text-sm text-gray-800">
+                                  {`${key.charAt(0).toUpperCase()}${key.slice(
+                                    1
+                                  )}`}
+                                  :
+                                </span>{" "}
                                 <span className="text-sm text-gray-800">
                                   {value.from}
                                 </span>{" "}
@@ -119,13 +130,13 @@ function TransactionTable({ transactionData, selectedRow, setSelectedRow }) {
           </tbody>
         </table>
       </div>
-
       {/* Pagination Controls */}
       {totalPages > 1 && (
         <div className="flex items-center justify-between mt-4 px-4">
           <div className="text-sm text-gray-600">
-            Showing {startIndex + 1} to {Math.min(endIndex, transactionData.length)}{' '}
-            of {transactionData.length} transactions
+            Showing {startIndex + 1} to{" "}
+            {Math.min(endIndex, transactionData.length)} of{" "}
+            {transactionData.length} transactions
           </div>
 
           <div className="flex gap-2">
@@ -135,8 +146,8 @@ function TransactionTable({ transactionData, selectedRow, setSelectedRow }) {
               disabled={currentPage === 1}
               className={`px-3 py-1 rounded border ${
                 currentPage === 1
-                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                  : 'bg-white text-gray-700 hover:bg-gray-50'
+                  ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                  : "bg-white text-gray-700 hover:bg-gray-50"
               }`}
             >
               Previous
@@ -164,8 +175,8 @@ function TransactionTable({ transactionData, selectedRow, setSelectedRow }) {
                 onClick={() => goToPage(page)}
                 className={`px-3 py-1 rounded border ${
                   currentPage === page
-                    ? 'bg-black text-white'
-                    : 'bg-white text-gray-700 hover:bg-gray-50'
+                    ? "bg-black text-white"
+                    : "bg-white text-gray-700 hover:bg-gray-50"
                 }`}
               >
                 {page}
@@ -194,8 +205,8 @@ function TransactionTable({ transactionData, selectedRow, setSelectedRow }) {
               disabled={currentPage === totalPages}
               className={`px-3 py-1 rounded border ${
                 currentPage === totalPages
-                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                  : 'bg-white text-gray-700 hover:bg-gray-50'
+                  ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                  : "bg-white text-gray-700 hover:bg-gray-50"
               }`}
             >
               Next
@@ -203,7 +214,7 @@ function TransactionTable({ transactionData, selectedRow, setSelectedRow }) {
           </div>
         </div>
       )}
-    </div>    
+    </div>
   );
 }
 
