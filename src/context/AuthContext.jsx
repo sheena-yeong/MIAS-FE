@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  async function signIn(eid, password) {
+async function signIn(eid, password) {
     try {
       const { data } = await axios.post(`${BASE_URL}/sign-in`, { eid, password });
 
@@ -25,6 +25,10 @@ export const AuthProvider = ({ children }) => {
 
       return { success: true };
     } catch (error) {
+      if (error.response.status === 401) {
+      return { success: false, error: "Username or password is incorrect" };
+
+      }
       return { success: false, error: error.message };
     }
   }
