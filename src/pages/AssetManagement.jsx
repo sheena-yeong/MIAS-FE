@@ -1,19 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 // import { sampleAssets } from '../data/sampleAssets';
-import { IoIosAddCircle } from 'react-icons/io';
-import { HiOutlineRefresh } from 'react-icons/hi';
-import AssetTable from '../components/Asset/AssetTable';
-import CommentsPanel from '../components/Asset/CommentsPanel';
-import AssetDialog from '../components/Asset/AssetDialog';
+import { IoIosAddCircle } from "react-icons/io";
+import { HiOutlineRefresh } from "react-icons/hi";
+import AssetTable from "../components/Asset/AssetTable";
+import CommentsPanel from "../components/Asset/CommentsPanel";
+import AssetDialog from "../components/Asset/AssetDialog";
 
-export default function AssetManagement({ assetData, fetchAssets, fetchTransactions }) {
+export default function AssetManagement({
+  assetData,
+  fetchAssets,
+  fetchTransactions,
+}) {
   const [selectedRow, setSelectedRow] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedAsset, setSelectedAsset] = useState(null);
   const [tableData, setTableData] = useState(assetData);
   const [openPanel, setOpenPanel] = useState(false);
 
-  const filterItems = ['Available Assets', 'Assets on Loan', 'Condition: New'];
+  const filterItems = ["Available Assets", "Assets on Loan", "Condition: New"];
   const [filter, setFilter] = useState(null);
 
   useEffect(() => {
@@ -21,14 +25,12 @@ export default function AssetManagement({ assetData, fetchAssets, fetchTransacti
   }, [assetData]);
 
   function filterData(item) {
-    if (item === 'Available Assets') {
-      setTableData(
-        assetData.filter((asset) => asset.actionType === 'Available')
-      );
-    } else if (item === 'Assets on Loan') {
-      setTableData(assetData.filter((asset) => asset.actionType === 'Loaned'));
-    } else if (item === 'Condition: New') {
-      setTableData(assetData.filter((asset) => asset.condition === 'New'));
+    if (item === "Available Assets") {
+      setTableData(assetData.filter((asset) => asset.status === "Available"));
+    } else if (item === "Assets on Loan") {
+      setTableData(assetData.filter((asset) => asset.status === "Loaned"));
+    } else if (item === "Condition: New") {
+      setTableData(assetData.filter((asset) => asset.condition === "New"));
     } else {
       setTableData(assetData);
     }
@@ -44,7 +46,7 @@ export default function AssetManagement({ assetData, fetchAssets, fetchTransacti
             <button
               key={idx}
               className={`px-3 py-1 rounded-3xl border border-transparent hover:border-slate-500 transition-transform duration-300 ease-in-out ${
-                item === filter ? 'bg-slate-400 text-white' : 'bg-slate-200'
+                item === filter ? "bg-slate-400 text-white" : "bg-slate-200"
               }`}
               onClick={() => {
                 if (item === filter) {
@@ -106,6 +108,7 @@ export default function AssetManagement({ assetData, fetchAssets, fetchTransacti
         selectedAsset={selectedAsset}
         fetchAssets={fetchAssets}
         fetchTransactions={fetchTransactions}
+        setSelectedAsset={setSelectedAsset}
       />
     </>
   );
