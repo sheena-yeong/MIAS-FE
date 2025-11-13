@@ -45,7 +45,7 @@ function CommentsPanel({ openPanel, onClose, selectedAsset }) {
               <div>
                 <label className="text-md text-black flex gap-2 items-center">
                   <FaWarehouse />
-                  Status: {selectedAsset.actionType}
+                  Status: {selectedAsset.status}
                 </label>
               </div>
 

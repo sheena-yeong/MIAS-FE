@@ -7,11 +7,11 @@ import {
   Tooltip,
   ResponsiveContainer,
   Cell,
-} from 'recharts';
+} from "recharts";
 
 function AssetCountByStatus({ assetData }) {
   const statusCount = assetData.reduce((acc, asset) => {
-    const status = asset.actionType;
+    const status = asset.status;
     if (acc[status]) {
       acc[status] += 1;
     } else {
@@ -26,12 +26,12 @@ function AssetCountByStatus({ assetData }) {
   }));
 
   const COLORS = [
-    '#0088FE',
-    '#00C49F',
-    '#FFBB28',
-    '#FF8042',
-    '#AA66CC',
-    '#FF6699',
+    "#0088FE",
+    "#00C49F",
+    "#FFBB28",
+    "#FF8042",
+    "#AA66CC",
+    "#FF6699",
   ];
 
   return (
