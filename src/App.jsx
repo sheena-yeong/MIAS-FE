@@ -17,12 +17,14 @@ import RoleProtectedRoute from "./components/Routes/RoleProtectedRoute.jsx";
 import { getAllAssets } from "./services/asset.js";
 import { getAllInvoices } from "./services/invoice.js";
 import { getAllTransactions } from "./services/transaction.js";
+import { getAllAssociates } from "./services/associate.js";
 
 function App() {
   const [isMenuCollapsed, setIsMenuCollapsed] = useState(false);
   const [assetData, setAssetData] = useState([]);
   const [invoiceData, setInvoiceData] = useState([]);
   const [transactionData, setTransactionData] = useState([]);
+  const [associateData, setAssociateData] = useState([]);
   const { isAuthenticated, loading, tokens } = useAuth();
 
   async function fetchAssets() {
@@ -55,11 +57,22 @@ function App() {
     }
   }
 
+  async function fetchAssociates() {
+    try {
+      const data = await getAllAssociates(tokens.access);
+      console.log(data);
+      if (data) setAssociateData(data);
+    } catch (error) {
+      console.log("Error fetching associates data from BE:", error);
+    }
+  }
+
   useEffect(() => {
     if (isAuthenticated) {
       fetchAssets();
       fetchInvoices();
       fetchTransactions();
+      fetchAssociates();
     }
   }, [isAuthenticated]);
 
@@ -123,6 +136,8 @@ function App() {
                             assetData={assetData}
                             fetchAssets={fetchAssets}
                             fetchTransactions={fetchTransactions}
+                            invoiceData={invoiceData}
+                            associateData={associateData}
                           />
                         }
                       />
