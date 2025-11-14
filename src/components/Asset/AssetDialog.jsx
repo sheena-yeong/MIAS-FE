@@ -11,10 +11,14 @@ function AssetDialog({
   fetchAssets,
   fetchTransactions,
   setSelectedAsset,
+  invoiceData,
+  associateData,
 }) {
   /* ========== useStates and useEffect ========== */
   const { tokens } = useAuth();
   const [isEditMode, setIsEditMode] = useState(false);
+  const [invoices, setInvoices] = useState(invoiceData);
+  const [associates, setAssociates] = useState(associateData);
   const [newAsset, setNewAsset] = useState({
     category: "",
     assetName: "",
@@ -33,13 +37,14 @@ function AssetDialog({
         category: selectedAsset.category || "",
         assetName: selectedAsset.assetName || "",
         serialNumber: selectedAsset.serialNumber || "",
-        origin: selectedAsset.origin || "",
+        origin: selectedAsset.origin || "Singapore",
         condition: selectedAsset.condition || "",
-        invoice: selectedAsset.invoice || "",
-        owner: selectedAsset.owner || "",
+        invoice: selectedAsset.invoice?.invoiceNumber || "",
+        owner: selectedAsset.owner?.name || "",
         status: selectedAsset.status || "",
-        acknowledged: selectedAsset.acknowledged || false,
+        acknowledged: selectedAsset.acknowledged || "Pending",
       });
+      console.log(selectedAsset);
       setIsEditMode(true);
     } else {
       resetValues();
@@ -59,6 +64,7 @@ function AssetDialog({
     "Other",
   ];
   const conditions = ["New", "Used", "Damaged", "Disposed"];
+  const origin = ["Singapore", "Japan", "Thailand"];
 
   /* ========== Functions ========== */
   function resetValues() {
@@ -66,12 +72,12 @@ function AssetDialog({
       category: "",
       assetName: "",
       serialNumber: "",
-      origin: "",
+      origin: "Singapore",
       condition: "",
       invoice: "",
       owner: "",
       status: "",
-      acknowledged: false,
+      acknowledged: "Pending",
     });
     setIsEditMode(false);
     setSelectedAsset(null);
@@ -243,9 +249,9 @@ function AssetDialog({
               <option disabled value="">
                 Select Invoice
               </option>
-              {invoices.map((invoice) => (
-                <option key={invoice._id} value={invoice._id}>
-                  {invoice.invoiceNumber}
+              {invoices.map((inv) => (
+                <option key={inv._id} value={inv._id}>
+                  {inv.invoiceNumber}
                 </option>
               ))}
               </select>
@@ -262,7 +268,7 @@ function AssetDialog({
                 onChange={handleInputChange}
               >
               <option disabled value="">Select Owner</option>
-              {owners.map((owner) => (
+              {associates.map((owner) => (
                 <option key={owner._id} value={owner._id}>
                   {owner.name}
                 </option>
