@@ -10,6 +10,8 @@ export default function AssetManagement({
   assetData,
   fetchAssets,
   fetchTransactions,
+  invoiceData,
+  associateData,
 }) {
   const [selectedRow, setSelectedRow] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
@@ -22,6 +24,7 @@ export default function AssetManagement({
 
   useEffect(() => {
     setTableData(assetData);
+    console.log(assetData);
   }, [assetData]);
 
   function filterData(item) {
@@ -109,6 +112,8 @@ export default function AssetManagement({
         fetchAssets={fetchAssets}
         fetchTransactions={fetchTransactions}
         setSelectedAsset={setSelectedAsset}
+        invoiceData={invoiceData}
+        associateData={associateData}
       />
     </>
   );
