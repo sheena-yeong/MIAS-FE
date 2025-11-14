@@ -133,16 +133,16 @@ function AssetTable({
                     {row.condition}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-800">
-                    {row.invoice}
+                    {row.invoice?.invoiceNumber || "-"}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-800">
-                    {row.owner}
+                    {row.owner?.name || "-"}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-800">
                     {row.acknowledged}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-800">
-                    {row.actionType}
+                    {row.status}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-800">
                     <div className="flex gap-1">
