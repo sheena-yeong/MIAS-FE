@@ -41,3 +41,16 @@ export const updateAssociate = async (updatedAssociate, associateId, token) => {
     console.log(`Error in updating associate: ${error.message}`);
   }
 };
+
+export const deleteAssociate = async (associateId, token) => {
+  try {
+    const res = await axios.delete(`${BASE_URL}/associates/${associateId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.data;
+  } catch (error) {
+    console.log(`Error in deleting associate: ${error.message}`);
+  }
+};
