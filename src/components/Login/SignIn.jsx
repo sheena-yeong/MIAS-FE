@@ -99,12 +99,12 @@ const SignIn = () => {
                 Sign Up
               </Link>
               <p>
-                <a
-                  href='/'
-                  className='font-medium text-blue-600 hover:text-blue-500'
-                >
-                  Forgot Password
-                </a>
+              <Link
+                to='/forgot-password'
+                className='font-medium text-blue-600 hover:text-blue-500'
+              >
+                Forgot Password
+              </Link>
               </p>
             </span>
           </div>
