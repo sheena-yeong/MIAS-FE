@@ -33,8 +33,7 @@ export const forgotPassword = async (email) => {
   try {
     const res = await axios.post(
       `${BASE_URL}/auth/forgot-password`,
-      { email },
-      {}
+      {email}
     );
     return res.data;
   } catch (error) {
