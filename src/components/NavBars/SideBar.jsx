@@ -4,7 +4,7 @@ import { LuHistory } from 'react-icons/lu';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { useAuth } from '../../context/AuthContext';
-import { FaFileInvoiceDollar, FaUserGear } from "react-icons/fa6";
+import { FaFileInvoiceDollar, FaUserGear } from 'react-icons/fa6';
 import miasLogo from '../../assets/mias_logo.png';
 import miasLogoCollapsed from '../../assets/mias_logo_collapsed.png';
 import avatarBoy from '../../assets/avatar-sample-boy.png';
@@ -32,20 +32,12 @@ function SideBar({ isMenuCollapsed }) {
       icon: <FaUserGear />,
       path: '/users',
       roles: ['Admin', 'Editor'],
-      subItems: [
-        {
-          name: 'Associates',
-          icon: <IoPeopleSharp />,
-          path: '/associates',
-          roles: ['Admin', 'Editor'],
-        },
-        {
-          name: 'Team',
-          icon: <IoPeopleSharp />,
-          path: '/teams',
-          roles: ['Admin'],
-        },
-      ],
+    },
+    {
+      name: 'Associates Directory',
+      icon: <IoPeopleSharp />,
+      path: '/associates',
+      roles: ['Admin', 'Editor'],
     },
     {
       name: 'Invoice Management',
@@ -75,7 +67,7 @@ function SideBar({ isMenuCollapsed }) {
       className={`flex flex-col justify-between h-full transition-all duration-300 items-start
       ${isMenuCollapsed ? 'w-20' : 'w-75'}`}
     >
-      <div className="flex flex-col items-start p-3 space-y-2 w-full">
+      <div className='flex flex-col items-start p-3 space-y-2 w-full'>
         {/* Logo */}
         <div
           className={`flex w-full mt-3 ${
@@ -84,8 +76,8 @@ function SideBar({ isMenuCollapsed }) {
         >
           <img
             src={isMenuCollapsed ? miasLogoCollapsed : miasLogo}
-            alt="MIAS Logo"
-            className="h-full w-auto object-contain transition-all duration-300"
+            alt='MIAS Logo'
+            className='h-full w-auto object-contain transition-all duration-300'
           />
         </div>
 
@@ -104,7 +96,7 @@ function SideBar({ isMenuCollapsed }) {
           }
           ${isMenuCollapsed ? 'justify-center' : ''}`}
           >
-            <span className="w-5 h-5">{item.icon}</span>
+            <span className='w-5 h-5'>{item.icon}</span>
             <span
               className={`whitespace-nowrap transition-all duration-300 overflow-hidden ${
                 isMenuCollapsed ? 'opacity-0 w-0' : 'opacity-100'
@@ -122,15 +114,15 @@ function SideBar({ isMenuCollapsed }) {
           isMenuCollapsed ? 'justify-center' : 'justify-between'
         }`}
       >
-        <div className="flex items-center min-w-0">
-          <img src={avatarBoy} alt="Profile Picture" className="w-10 m-5" />
+        <div className='flex items-center min-w-0'>
+          <img src={avatarBoy} alt='Profile Picture' className='w-10 m-5' />
           <div
             className={`flex flex-col min-w-0 transition-all duration-300 overflow-hidden ${
               isMenuCollapsed ? 'opacity-0 w-0' : 'opacity-100'
             }`}
           >
-            <h1 className="whitespace-nowrap">{user.username}</h1>
-            <h1 className="text-slate-400 whitespace-nowrap">{user.role}</h1>
+            <h1 className='whitespace-nowrap'>{user.username}</h1>
+            <h1 className='text-slate-400 whitespace-nowrap'>{user.role}</h1>
           </div>
         </div>
 
@@ -148,9 +140,9 @@ function SideBar({ isMenuCollapsed }) {
 
             <DropdownMenu.Portal>
               <DropdownMenu.Content
-                className="bg-white text-black rounded-md shadow-lg p-2 my-5 mr-2 min-w-[90px]"
+                className='bg-white text-black rounded-md shadow-lg p-2 my-5 mr-2 min-w-[90px]'
                 sideOffset={5}
-                align="end"
+                align='end'
                 alignOffset={-10}
               >
                 <DropdownMenu.Item onClick={handleLogout}>
