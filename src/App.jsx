@@ -18,6 +18,8 @@ import { getAllAssets } from "./services/asset.js";
 import { getAllInvoices } from "./services/invoice.js";
 import { getAllTransactions } from "./services/transaction.js";
 import { getAllAssociates } from "./services/associate.js";
+import ForgotPassword from "./pages/ForgotPassword.jsx";
+import ResetPassword from "./pages/ResetPassword.jsx";
 
 function App() {
   const [isMenuCollapsed, setIsMenuCollapsed] = useState(false);
@@ -92,6 +94,14 @@ function App() {
           path="/signin"
           element={isAuthenticated ? <Navigate to="/" replace /> : <SignIn />}
         />
+        <Route
+          path="/forgot-password"
+          element={<ForgotPassword />}
+        />  
+        <Route
+          path="/reset-password"
+          element={<ResetPassword />}
+        />      
         <Route
           path="/signup"
           element={isAuthenticated ? <Navigate to="/" replace /> : <SignUp />}
