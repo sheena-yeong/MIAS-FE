@@ -41,3 +41,16 @@ export const updateInvoice = async (updatedInvoice, invoiceId, token) => {
     console.log(`Error in updating invoice: ${error.message}`);
   }
 };
+
+export const deleteInvoice = async (invoiceId, token) => {
+  try {
+    const res = await axios.delete(`${BASE_URL}/invoices/${invoiceId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.data;
+  } catch (error) {
+    console.log(`Error in deleting invoice: ${error.message}`);
+  }
+};
