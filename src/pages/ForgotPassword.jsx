@@ -1,10 +1,14 @@
 import { forgotPassword } from '../services/auth';
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import * as Toast from '@radix-ui/react-toast';
+import PasswordToast from '../components/Password/PasswordToast';
 import miasLogo from '../assets/mias_logo.png';
 
 function ForgotPassword() {
   const [email, setEmail] = useState('');
+  const [openAlert, setOpenAlert] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -12,13 +16,15 @@ function ForgotPassword() {
       const res = await forgotPassword(
         email
       );
-      return res;
+      setOpenAlert(true);
+      setTimeout(() => navigate('/signin'), 3000);
     } catch (err) {
       console.log("Failed to send email", err);
     }
   };
 
   return (
+    <Toast.Provider>
     <div className='grid-bg min-h-screen flex items-center justify-center bg-slate-800 flex-col'>
       <img src={miasLogo} alt='MIAS Logo' className='w-80 pb-5' />
       <div className='max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow'>
@@ -70,6 +76,14 @@ function ForgotPassword() {
         </form>
       </div>
     </div>
+
+    <PasswordToast
+        openAlert={openAlert}
+        setOpenAlert={setOpenAlert}
+        title='Email Sent'
+        description='Password reset link sent to your registered email address.'
+    />
+    </Toast.Provider>
   );
 }
 
