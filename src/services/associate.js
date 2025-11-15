@@ -15,3 +15,16 @@ export const getAllAssociates = async (token) => {
     return null;
   }
 };
+
+export const createAssociate = async (newAssociate, token) => {
+  try {
+    const res = await axios.post(`${BASE_URL}/associates`, newAssociate, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.data;
+  } catch (error) {
+    console.log(`Error in creating associate: ${error.message}`);
+  }
+};
