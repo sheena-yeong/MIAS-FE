@@ -34,7 +34,7 @@ function SideBar({ isMenuCollapsed }) {
       roles: ['Admin', 'Editor'],
     },
     {
-      name: 'Associates Directory',
+      name: 'Associate Directory',
       icon: <IoPeopleSharp />,
       path: '/associates',
       roles: ['Admin', 'Editor'],
