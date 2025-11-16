@@ -153,7 +153,12 @@ function App() {
                       />
                       <Route
                         path="/associates"
-                        element={<AssociateManagement />}
+                        element={
+                          <AssociateManagement 
+                            associateData={associateData}
+                            fetchAssociates={fetchAssociates}  
+                          />
+                        }
                       />
                       <Route
                         path="/invoices"
