@@ -31,7 +31,7 @@ function SideBar({ isMenuCollapsed }) {
       name: 'User Management',
       icon: <FaUserGear />,
       path: '/users',
-      roles: ['Admin', 'Editor'],
+      roles: ['Admin'],
     },
     {
       name: 'Associate Directory',
