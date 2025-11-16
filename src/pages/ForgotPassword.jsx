@@ -9,6 +9,7 @@ function ForgotPassword() {
   const [email, setEmail] = useState('');
   const [openAlert, setOpenAlert] = useState(false);
   const navigate = useNavigate();
+  const [toastMessage, setToastMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,6 +17,7 @@ function ForgotPassword() {
       const res = await forgotPassword(
         email
       );
+      setToastMessage(res.message);
       setOpenAlert(true);
       setTimeout(() => navigate('/signin'), 3000);
     } catch (err) {
@@ -81,7 +83,7 @@ function ForgotPassword() {
         openAlert={openAlert}
         setOpenAlert={setOpenAlert}
         title='Email Sent'
-        description='Password reset link sent to your registered email address.'
+        description={toastMessage}
     />
     </Toast.Provider>
   );
