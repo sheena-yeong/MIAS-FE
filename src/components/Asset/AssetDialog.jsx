@@ -39,8 +39,8 @@ function AssetDialog({
         serialNumber: selectedAsset.serialNumber || "",
         origin: selectedAsset.origin || "Singapore",
         condition: selectedAsset.condition || "",
-        invoice: selectedAsset.invoice?.invoiceNumber || "",
-        owner: selectedAsset.owner?.name || "",
+        invoice: selectedAsset.invoice?._id || "",
+        owner: selectedAsset.owner?._id || "",
         status: selectedAsset.status || "",
         acknowledged: selectedAsset.acknowledged || "Pending",
       });
