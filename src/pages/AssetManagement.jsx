@@ -5,6 +5,7 @@ import { HiOutlineRefresh } from "react-icons/hi";
 import AssetTable from "../components/Asset/AssetTable";
 import CommentsPanel from "../components/Asset/CommentsPanel";
 import AssetDialog from "../components/Asset/AssetDialog";
+import { useAuth } from "../context/AuthContext";
 
 export default function AssetManagement({
   assetData,
@@ -12,28 +13,52 @@ export default function AssetManagement({
   fetchTransactions,
   invoiceData,
   associateData,
+  searchQuery,
 }) {
   const [selectedRow, setSelectedRow] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedAsset, setSelectedAsset] = useState(null);
   const [tableData, setTableData] = useState(assetData);
   const [openPanel, setOpenPanel] = useState(false);
+  const { user } = useAuth();
 
-  const filterItems = ["Available Assets", "Assets on Loan", "Condition: New"];
+  const filterItems = ["Available Assets", "Assets on Loan", "Deployed Assets"];
   const [filter, setFilter] = useState(null);
 
+  const filteredAssets = !searchQuery
+    ? tableData
+    : tableData.filter((asset) => {
+      const query = searchQuery.toLowerCase();
+      return (
+        asset.category.toLowerCase().includes(query) ||
+        asset.assetName.toLowerCase().includes(query) || 
+        asset.serialNumber.toLowerCase().includes(query) ||
+        asset.origin.toLowerCase().includes(query) ||
+        asset.condition.toLowerCase().includes(query) ||
+        asset.invoice.invoiceNumber.toLowerCase().includes(query) ||
+        asset.owner.name.toLowerCase().includes(query) ||
+        asset.acknowledged.toLowerCase().includes(query)
+    );
+  });
+
   useEffect(() => {
-    setTableData(assetData);
-    console.log(assetData);
-  }, [assetData]);
+    if (user.role === 'Viewer') {
+      const ownedAssets = assetData.filter(
+        (asset) => asset.owner.name === user.username
+      );
+      setTableData(ownedAssets);
+    } else {
+      setTableData(assetData);
+    }
+  }, [assetData, user]);
 
   function filterData(item) {
     if (item === "Available Assets") {
       setTableData(assetData.filter((asset) => asset.status === "Available"));
     } else if (item === "Assets on Loan") {
       setTableData(assetData.filter((asset) => asset.status === "Loaned"));
-    } else if (item === "Condition: New") {
-      setTableData(assetData.filter((asset) => asset.condition === "New"));
+    } else if (item === "Deployed Assets") {
+      setTableData(assetData.filter((asset) => asset.status === "Assigned"));
     } else {
       setTableData(assetData);
     }
@@ -68,7 +93,10 @@ export default function AssetManagement({
         <div className="flex items-center">
           <HiOutlineRefresh
             size={25}
-            onClick={fetchAssets}
+            onClick={() => {
+              setFilter(null);
+              fetchAssets();
+            }}
             className="transition-transform duration-200 hover:rotate-45"
           />
           <button
@@ -94,6 +122,7 @@ export default function AssetManagement({
         setSelectedAsset={setSelectedAsset}
         fetchAssets={fetchAssets}
         setOpenPanel={setOpenPanel}
+        filteredAssets={filteredAssets}
       />
 
       <CommentsPanel
