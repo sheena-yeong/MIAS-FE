@@ -38,7 +38,7 @@ function CommentsPanel({ openPanel, onClose, selectedAsset }) {
               <div>
                 <label className="text-md text-black flex gap-2 items-center">
                   <IoPerson />
-                  Owner: {selectedAsset.owner.name}
+                  Owner: {selectedAsset.owner?.name || "Unassigned"}
                 </label>
               </div>
 
