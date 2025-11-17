@@ -38,6 +38,8 @@ function AvailableAssetsByCategory({ assetData }) {
     '#FF6699',
   ];
 
+  if (chartData.length === 0) return null;
+
   return (
     <>
       <div className="bg-white p-6 rounded-lg shadow">

@@ -33,11 +33,13 @@ function AssetCountByOrigin({ assetData }) {
     '#82ca9d',
   ];
 
+  if (chartData.length === 0) return null;
+
   return (
     <>
       <div className="bg-white p-6 rounded-lg shadow">
         <h3 className="text-xl font-semibold mb-4">
-          Distribution of Assets by Origin
+          Asset Count by Origin
         </h3>
 
         <ResponsiveContainer width="100%" height={300}>
