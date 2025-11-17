@@ -17,6 +17,7 @@ function AssetDialog({
   /* ========== useStates and useEffect ========== */
   const { tokens } = useAuth();
   const [isEditMode, setIsEditMode] = useState(false);
+  const [errMsg, setErrMsg] = useState('');
   const [invoices, setInvoices] = useState(invoiceData);
   const [associates, setAssociates] = useState(associateData);
   const [newAsset, setNewAsset] = useState({
@@ -64,7 +65,7 @@ function AssetDialog({
     "Other",
   ];
   const conditions = ["New", "Used", "Damaged", "Disposed"];
-  const origin = ["Singapore", "Japan", "Thailand"];
+  const origins = ["Singapore", "Japan", "Thailand"];
 
   /* ========== Functions ========== */
   function resetValues() {
@@ -87,10 +88,14 @@ function AssetDialog({
     e.preventDefault();
     try {
       const result = await createAsset(newAsset, tokens.access);
+    //  if (result.ok) { 
       resetValues();
       setOpenDialog(false);
       fetchAssets();
       fetchTransactions();
+    // } else {
+    //   setErrMsg('This serial number is already taken')
+    // }
       console.log("Asset created:", result);
     } catch (error) {
       console.log("Failed to create asset", error);
@@ -200,13 +205,21 @@ function AssetDialog({
               >
                 Origin
               </label>
-              <input
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              <select
                 name="origin"
                 value={newAsset.origin}
                 onChange={handleInputChange}
-                placeholder="e.g. Singapore"
-              />
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option disabled value="">
+                  Select Origin
+                </option>
+                {origins.map((origin, idx) => (
+                  <option key={idx} value={origin}>
+                    {origin}
+                  </option>
+                ))}
+              </select>
             </fieldset>
 
             <fieldset className="mb-4">
@@ -296,6 +309,7 @@ function AssetDialog({
                 <option value="Loaned">Loaned</option>
                 <option value="Available">Available</option>
               </select>
+              {/* <p>{errMsg}</p> */}
             </fieldset>
 
             <div className="flex justify-end mt-6 gap-2">
