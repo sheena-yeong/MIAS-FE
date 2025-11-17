@@ -12,6 +12,7 @@ function Settings() {
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [toastMessage, setToastMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,6 +23,7 @@ function Settings() {
         confirmPassword,
         tokens.access
       );
+      setToastMessage(res.message);
       setOpenDialog(false);
       setOpenAlert(true);
       setTimeout(() => setOpenAlert(false), 1000);
@@ -29,7 +31,9 @@ function Settings() {
       setOldPassword('');
       setNewPassword('');
       setConfirmPassword('');
+      // setToastMessage('')
     } catch (err) {
+      setToastMessage(err.message);
       console.log('Failed to change password', err);
     }
   };
@@ -129,7 +133,7 @@ function Settings() {
         openAlert={openAlert}
         setOpenAlert={setOpenAlert}
         title='Password Change'
-        description='Password changed successfully'
+        description={toastMessage}
       />
     </Toast.Provider>
   );
