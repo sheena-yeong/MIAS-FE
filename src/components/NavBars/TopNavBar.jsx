@@ -1,4 +1,3 @@
-import { IoIosNotificationsOutline } from 'react-icons/io';
 import { IoSettingsOutline, IoSearchOutline } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 import { IoIosMenu } from "react-icons/io";
@@ -28,10 +27,6 @@ function NavBar({ isMenuCollapsed, setIsMenuCollapsed, searchQuery, setSearchQue
           </div>
         </div>
         <div className="flex items-center gap-8 mr-5">
-          <IoIosNotificationsOutline
-            size={23}
-            className="transition-transform duration-300 ease-in-out hover:rotate-12 hover:scale-110"
-          />
           <IoSettingsOutline
             size={23}
             onClick={() => navigate('/settings')}
