@@ -19,7 +19,7 @@ function SideBar({ isMenuCollapsed }) {
       name: 'Dashboard',
       icon: <IoHomeSharp />,
       path: '/',
-      roles: ['Admin', 'Editor', 'Viewer'],
+      roles: ['Admin', 'Editor'],
     },
     {
       name: 'Asset Management',
@@ -46,7 +46,7 @@ function SideBar({ isMenuCollapsed }) {
       roles: ['Admin', 'Editor'],
     },
     {
-      name: 'Transactions',
+      name: 'Asset Transactions',
       icon: <LuHistory />,
       path: '/transactions',
       roles: ['Admin', 'Editor'],
