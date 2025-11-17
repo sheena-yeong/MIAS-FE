@@ -26,6 +26,9 @@ export const createAsset = async (newAsset, token) => {
     return res.data;
   } catch (error) {
     console.log(`Error in creating asset: ${error.message}`);
+    if (error.response?.data) {
+      return error.response.data;
+    }
   }
 };
 
