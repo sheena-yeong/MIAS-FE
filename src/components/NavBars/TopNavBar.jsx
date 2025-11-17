@@ -3,7 +3,7 @@ import { IoSettingsOutline, IoSearchOutline } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 import { IoIosMenu } from "react-icons/io";
 
-function NavBar({ isMenuCollapsed, setIsMenuCollapsed }) {
+function NavBar({ isMenuCollapsed, setIsMenuCollapsed, searchQuery, setSearchQuery }) {
   const navigate = useNavigate();
 
   return (
@@ -18,10 +18,12 @@ function NavBar({ isMenuCollapsed, setIsMenuCollapsed }) {
             <IoSearchOutline className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
               type="search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10 pr-3 py-2 w-full rounded-xl bg-gray-50 border border-gray-500
             text-sm placeholder-gray-400 outline-none transition-shadow
             focus:shadow-[0_0_0_4px_rgba(0,122,255,0.12)] focus:border-blue-400"
-              placeholder="Search assets, invoices or users..."
+              placeholder="Search..."
             />
           </div>
         </div>
