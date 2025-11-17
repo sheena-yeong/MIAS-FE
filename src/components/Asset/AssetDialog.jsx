@@ -87,15 +87,17 @@ function AssetDialog({
   async function handleCreateAsset(e) {
     e.preventDefault();
     try {
+      console.log("Submitting newAsset:", newAsset);
+
       const result = await createAsset(newAsset, tokens.access);
-    //  if (result.ok) { 
-      resetValues();
-      setOpenDialog(false);
-      fetchAssets();
-      fetchTransactions();
-    // } else {
-    //   setErrMsg('This serial number is already taken')
-    // }
+     if (!result.success) { 
+      setErrMsg(`Error: ${result.message}`)
+      } else {
+        resetValues();
+        setOpenDialog(false);
+        fetchAssets();
+        fetchTransactions();
+      }
       console.log("Asset created:", result);
     } catch (error) {
       console.log("Failed to create asset", error);
@@ -175,6 +177,7 @@ function AssetDialog({
               </label>
               <input
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
                 name="assetName"
                 value={newAsset.assetName}
                 onChange={handleInputChange}
@@ -191,6 +194,7 @@ function AssetDialog({
               </label>
               <input
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
                 name="serialNumber"
                 value={newAsset.serialNumber}
                 onChange={handleInputChange}

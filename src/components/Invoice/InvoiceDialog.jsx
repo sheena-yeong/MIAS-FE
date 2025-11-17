@@ -112,6 +112,7 @@ function InvoiceDialog({
                 Invoice Number
               </label>
               <input
+                required
                 name="invoiceNumber"
                 value={newInvoice.invoiceNumber}
                 onChange={handleInputChange}
@@ -129,6 +130,7 @@ function InvoiceDialog({
               </label>
               <input
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
                 name="vendor"
                 value={newInvoice.vendor}
                 onChange={handleInputChange}
@@ -145,6 +147,7 @@ function InvoiceDialog({
               </label>
               <input
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
                 type="date"
                 name="date"
                 value={newInvoice.date}
@@ -161,6 +164,7 @@ function InvoiceDialog({
               </label>
               <input
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
                 type="number"
                 name="price"
                 value={newInvoice.price}

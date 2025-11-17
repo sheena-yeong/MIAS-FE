@@ -108,6 +108,7 @@ function AssociateDialog({
                 EID
               </label>
               <input
+                required
                 name="eid"
                 value={newAssociate.eid}
                 onChange={handleInputChange}
@@ -125,6 +126,7 @@ function AssociateDialog({
               </label>
               <input
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
                 name="name"
                 value={newAssociate.name}
                 onChange={handleInputChange}
@@ -141,6 +143,7 @@ function AssociateDialog({
               </label>
               <input
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
                 name="email"
                 value={newAssociate.email}
                 onChange={handleInputChange}
@@ -153,7 +156,7 @@ function AssociateDialog({
                 className="block text-sm font-medium mb-1"
                 htmlFor="terminationDate"
               >
-                Termination Date
+                Termination Date (Optional)
               </label>
               <input
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
