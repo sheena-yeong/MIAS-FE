@@ -2,7 +2,7 @@ import { IoSettingsOutline, IoSearchOutline } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 import { IoIosMenu } from "react-icons/io";
 
-function NavBar({ isMenuCollapsed, setIsMenuCollapsed, searchQuery, setSearchQuery }) {
+function NavBar({ isMenuCollapsed, setIsMenuCollapsed, searchQuery, setSearchQuery, showSearch }) {
   const navigate = useNavigate();
 
   return (
@@ -13,6 +13,7 @@ function NavBar({ isMenuCollapsed, setIsMenuCollapsed, searchQuery, setSearchQue
             size={25}
             onClick={() => setIsMenuCollapsed(!isMenuCollapsed)}
           />
+          {showSearch && (
           <div className="relative w-full max-w-[800px] min-w-[600px]">
             <IoSearchOutline className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
@@ -25,6 +26,7 @@ function NavBar({ isMenuCollapsed, setIsMenuCollapsed, searchQuery, setSearchQue
               placeholder="Search..."
             />
           </div>
+        )}
         </div>
         <div className="flex items-center gap-8 mr-5">
           <IoSettingsOutline

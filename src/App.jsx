@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useAuth } from "./context/AuthContext.jsx";
 import SideBar from "./components/NavBars/SideBar.jsx";
@@ -31,6 +31,9 @@ function App() {
   const [userData, setUserData] = useState([]);
   const [associateData, setAssociateData] = useState([]);
   const { isAuthenticated, loading, tokens } = useAuth();
+
+  const location = useLocation();
+  const showSearch = location.pathname !== '/';
 
   async function fetchAssets() {
     try {
@@ -137,6 +140,7 @@ function App() {
                     isMenuCollapsed={isMenuCollapsed}
                     searchQuery={searchQuery}
                     setSearchQuery={setSearchQuery}
+                    showSearch={showSearch}
                   />
                   <main className="flex-1 overflow-auto bg-gray-50 p-6">
                     <Routes>
@@ -156,7 +160,7 @@ function App() {
                       {/* Editor and Viewer Access */}
                       <Route
                         path="/"
-                        element={<Dashboard assetData={assetData} />}
+                        element={<Dashboard assetData={assetData}/>}
                       />
                       <Route
                         path="/assets"
