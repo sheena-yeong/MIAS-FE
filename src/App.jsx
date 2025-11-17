@@ -6,10 +6,10 @@ import TopNavBar from "./components/NavBars/TopNavBar.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import InvoiceManagement from "./pages/InvoiceManagement.jsx";
 import AssetManagement from "./pages/AssetManagement.jsx";
-import AssociateManagement from "./pages/AssociateManagement.jsx";
+import AssociateDirectory from "./pages/AssociateDirectory.jsx";
 import UserManagement from "./pages/UserManagement.jsx";
 import Settings from "./pages/Settings.jsx";
-import Transactions from "./pages/Transactions.jsx";
+import AssetTransactions from "./pages/AssetTransactions.jsx";
 import SignIn from "./components/Login/SignIn.jsx";
 import SignUp from "./components/Login/SignUp.jsx";
 import ProtectedRoute from "./components/Routes/ProtectedRoute.jsx";
@@ -17,15 +17,18 @@ import RoleProtectedRoute from "./components/Routes/RoleProtectedRoute.jsx";
 import { getAllAssets } from "./services/asset.js";
 import { getAllInvoices } from "./services/invoice.js";
 import { getAllTransactions } from "./services/transaction.js";
+import { getAllUsers } from "./services/user.js";
 import { getAllAssociates } from "./services/associate.js";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import ResetPassword from "./pages/ResetPassword.jsx";
 
 function App() {
   const [isMenuCollapsed, setIsMenuCollapsed] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const [assetData, setAssetData] = useState([]);
   const [invoiceData, setInvoiceData] = useState([]);
   const [transactionData, setTransactionData] = useState([]);
+  const [userData, setUserData] = useState([]);
   const [associateData, setAssociateData] = useState([]);
   const { isAuthenticated, loading, tokens } = useAuth();
 
@@ -59,6 +62,16 @@ function App() {
     }
   }
 
+  async function fetchUsers() {
+    try {
+      const data = await getAllUsers(tokens.access);
+      console.log(data);
+      if (data) setUserData(data);
+    } catch (error) {
+      console.log("Error fetching users data from BE:", error);
+    }
+  }
+
   async function fetchAssociates() {
     try {
       const data = await getAllAssociates(tokens.access);
@@ -74,6 +87,7 @@ function App() {
       fetchAssets();
       fetchInvoices();
       fetchTransactions();
+      fetchUsers();
       fetchAssociates();
     }
   }, [isAuthenticated]);
@@ -121,6 +135,8 @@ function App() {
                   <TopNavBar
                     setIsMenuCollapsed={setIsMenuCollapsed}
                     isMenuCollapsed={isMenuCollapsed}
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery}
                   />
                   <main className="flex-1 overflow-auto bg-gray-50 p-6">
                     <Routes>
@@ -129,7 +145,10 @@ function App() {
                         path="/users"
                         element={
                           <RoleProtectedRoute allowedRoles={["Admin"]}>
-                            <UserManagement />
+                            <UserManagement 
+                              userData={userData}
+                              fetchUsers={fetchUsers}
+                            />
                           </RoleProtectedRoute>
                         }
                       />
@@ -148,13 +167,14 @@ function App() {
                             fetchTransactions={fetchTransactions}
                             invoiceData={invoiceData}
                             associateData={associateData}
+                            searchQuery={searchQuery}
                           />
                         }
                       />
                       <Route
                         path="/associates"
                         element={
-                          <AssociateManagement 
+                          <AssociateDirectory 
                             associateData={associateData}
                             fetchAssociates={fetchAssociates}  
                           />
@@ -172,7 +192,7 @@ function App() {
                       <Route
                         path="/transactions"
                         element={
-                          <Transactions transactionData={transactionData} />
+                          <AssetTransactions transactionData={transactionData} />
                         }
                       />
                       <Route path="/settings" element={<Settings />} />
