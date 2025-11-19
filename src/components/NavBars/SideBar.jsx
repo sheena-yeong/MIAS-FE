@@ -25,8 +25,14 @@ function SideBar({ isMenuCollapsed }) {
       name: 'Asset Management',
       icon: <IoFolderOpen />,
       path: '/assets',
-      roles: ['Admin', 'Editor', 'Viewer'],
+      roles: ['Admin', 'Editor'],
     },
+    {
+      name: 'My Assets',
+      icon: <IoFolderOpen />,
+      path: '/myassets',
+      roles: ['Viewer'],
+    },    
     {
       name: 'User Management',
       icon: <FaUserGear />,
