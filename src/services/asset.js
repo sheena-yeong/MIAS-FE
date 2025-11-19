@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'https://mias-be-production.up.railway.app';
 
 export const getAllAssets = async (token) => {
   try {
