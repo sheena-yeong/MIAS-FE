@@ -21,6 +21,7 @@ import { getAllUsers } from "./services/user.js";
 import { getAllAssociates } from "./services/associate.js";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import ResetPassword from "./pages/ResetPassword.jsx";
+import MyAsset from "./pages/MyAssets.jsx";
 
 function App() {
   const [isMenuCollapsed, setIsMenuCollapsed] = useState(false);
@@ -33,7 +34,7 @@ function App() {
   const { isAuthenticated, loading, tokens } = useAuth();
 
   const location = useLocation();
-  const showSearch = location.pathname !== '/';
+  const showSearch = location.pathname !== '/' &&  location.pathname !== '/myassets' && location.pathname !== '/settings';
 
   async function fetchAssets() {
     try {
@@ -157,10 +158,14 @@ function App() {
                         }
                       />
 
-                      {/* Editor and Viewer Access */}
+                      {/* Admin and Editor Access */}
                       <Route
                         path="/"
-                        element={<Dashboard assetData={assetData}/>}
+                        element={
+                        <RoleProtectedRoute allowedRoles={["Admin", "Editor"]}>
+                          <Dashboard assetData={assetData}/>
+                          </RoleProtectedRoute>
+                        }
                       />
                       <Route
                         path="/assets"
@@ -199,7 +204,18 @@ function App() {
                           <AssetTransactions transactionData={transactionData} />
                         }
                       />
-                      <Route path="/settings" element={<Settings />} />
+                      {/* Viewer Access */}
+                      <Route
+                        path="/myassets"
+                        element={
+                          <MyAsset
+                            assetData={assetData}
+                            fetchAssets={fetchAssets}                         
+                            showSearch={showSearch}
+                          />
+                        }
+                      />                      
+                      <Route path="/settings" element={<Settings showSearch={showSearch} />} />
                       <Route path="*" element={<Navigate to="/" replace />} />
                     </Routes>
                   </main>
