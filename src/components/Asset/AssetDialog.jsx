@@ -29,7 +29,7 @@ function AssetDialog({
     invoice: "",
     owner: "",
     status: "",
-    acknowledged: false,
+    acknowledged: "No",
   });
 
   useEffect(() => {
@@ -43,7 +43,7 @@ function AssetDialog({
         invoice: selectedAsset.invoice?._id || "",
         owner: selectedAsset.owner?._id || "",
         status: selectedAsset.status || "",
-        acknowledged: selectedAsset.acknowledged || "Pending",
+        acknowledged: selectedAsset.acknowledged || "No",
       });
       console.log(selectedAsset);
       setIsEditMode(true);
@@ -78,7 +78,7 @@ function AssetDialog({
       invoice: "",
       owner: "",
       status: "",
-      acknowledged: "Pending",
+      acknowledged: "No",
     });
     setIsEditMode(false);
     setSelectedAsset(null);
@@ -152,6 +152,7 @@ function AssetDialog({
                 Category
               </label>
               <select
+                required
                 name="category"
                 value={newAsset.category}
                 onChange={handleInputChange}
@@ -210,6 +211,7 @@ function AssetDialog({
                 Origin
               </label>
               <select
+                required
                 name="origin"
                 value={newAsset.origin}
                 onChange={handleInputChange}
@@ -234,6 +236,7 @@ function AssetDialog({
                 Condition
               </label>
               <select
+                required
                 name="condition"
                 value={newAsset.condition}
                 onChange={handleInputChange}
@@ -258,6 +261,7 @@ function AssetDialog({
                 Invoice
               </label>
               <select
+                required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 name="invoice"
                 value={newAsset.invoice}
@@ -279,6 +283,7 @@ function AssetDialog({
                 Owner
               </label>
               <select
+                required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 name="owner"
                 value={newAsset.owner}
@@ -301,6 +306,7 @@ function AssetDialog({
                 Status
               </label>
               <select
+                required
                 name="status"
                 value={newAsset.status}
                 onChange={handleInputChange}
