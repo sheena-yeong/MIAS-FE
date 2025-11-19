@@ -5,7 +5,6 @@ import { HiOutlineRefresh } from "react-icons/hi";
 import AssetTable from "../components/Asset/AssetTable";
 import CommentsPanel from "../components/Asset/CommentsPanel";
 import AssetDialog from "../components/Asset/AssetDialog";
-import { useAuth } from "../context/AuthContext";
 
 export default function AssetManagement({
   assetData,
@@ -20,10 +19,17 @@ export default function AssetManagement({
   const [selectedAsset, setSelectedAsset] = useState(null);
   const [tableData, setTableData] = useState(assetData);
   const [openPanel, setOpenPanel] = useState(false);
-  const { user } = useAuth();
 
   const filterItems = ["Available Assets", "Assets on Loan", "Deployed Assets"];
   const [filter, setFilter] = useState(null);
+
+  useEffect(() => {
+    if(!filter) {
+      setTableData(assetData);
+    } else {
+      filterData(filter);
+    }
+  }, [assetData, filter]);
 
   const filteredAssets = !searchQuery
     ? tableData
@@ -40,17 +46,6 @@ export default function AssetManagement({
         asset.acknowledged.toLowerCase().includes(query)
     );
   });
-
-  useEffect(() => {
-    if (user.role === 'Viewer') {
-      const ownedAssets = assetData.filter(
-        (asset) => asset.owner.name === user.username
-      );
-      setTableData(ownedAssets);
-    } else {
-      setTableData(assetData);
-    }
-  }, [assetData, user]);
 
   function filterData(item) {
     if (item === "Available Assets") {
