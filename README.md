@@ -2,13 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>MIAS – README</title>
 </head>
 <body>
 
   <h1>MIAS</h1>
 
-  <img src="./src/assets/mias_logo.png"/>
+  <img src="./src/assets/mias-readme-banner.png"/>
 
   <h2>About the App</h2>
   <p>
@@ -23,6 +22,18 @@
   <ul>
     <li>Deployed App: <a href="https://mias-fe-production.up.railway.app" target="_blank">https://mias-fe-production.up.railway.app</a></li>
     <li>Backend Repository: <a href="https://github.com/Simonongst/MIAS-BE" target="_blank">https://github.com/Simonongst/MIAS-BE</a></li>
+  </ul>
+
+  <h2>Features</h2>
+  <ul>
+    <li>Dashboard displaying key statistics for quick insights</li>
+    <li>Manage assets with full create, update, and tracking capabilities</li>
+    <li>Ability to trigger email notifications to associates for asset acknowledgement</li>
+    <li>Manage invoices linked to assets</li>
+    <li>User account management including registration, login, and role-based access control</li>
+    <li>Associate accounts with protected routes that unlock different views based on role</li>
+    <li>Password management including change-password and forgot-password workflows</li>
+    <li>Transaction log capturing all asset-related changes</li>
   </ul>
 
   <h2>Attributions</h2>
