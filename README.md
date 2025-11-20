@@ -7,7 +7,7 @@
 
   <h1>MIAS</h1>
 
-  <img src="./src/assets/mias-readme-banner.png"/>
+  <img src="./src/assets/mias-readme-banner.png?v=2"/>
 
   <h2>About the App</h2>
   <p>
