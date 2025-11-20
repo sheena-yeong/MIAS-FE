@@ -4,10 +4,7 @@
   <meta charset="UTF-8" />
 </head>
 <body>
-
-  <h1>MIAS</h1>
-
-  <img src="./src/assets/mias-readme-banner.png?v=2"/>
+  <img src="./src/assets/mias-readme-banner-v2.png"/>
 
   <h2>About the App</h2>
   <p>
