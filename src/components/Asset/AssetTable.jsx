@@ -155,7 +155,7 @@ function AssetTable({
                 Owner
               </th>
               <th className='px-6 py-3 text-left text-sm font-semibold text-gray-700'>
-                Acknowledged
+                Acknowledgement
               </th>
               <th className='px-6 py-3 text-left text-sm font-semibold text-gray-700'>
                 Status
@@ -197,7 +197,7 @@ function AssetTable({
                     {row.owner?.name || '-'}
                   </td>
                   <td className='px-6 py-4 text-sm text-gray-800'>
-                    {row.acknowledged}
+                    {row.acknowledgement}
                   </td>
                   <td className='px-6 py-4 text-sm text-gray-800'>
                     {row.status}
@@ -206,11 +206,11 @@ function AssetTable({
                     <div className='flex gap-1'>
                       <button
                         className={`p-1 rounded-lg text-white ${
-                          row.acknowledged === 'Yes'
+                          row.acknowledgement === 'Yes'
                             ? 'bg-gray-300 cursor-not-allowed'
                             : 'bg-green-400 cursor-pointer'
                         }`}
-                        disabled={row.acknowledged === 'Yes'}
+                        disabled={row.acknowledgement === 'Yes'}
                         onClick={() => {
                           handleSend(row);
                         }}

@@ -98,7 +98,7 @@ function MyAsset({ assetData, fetchAssets }) {
                 Owner
               </th>
               <th className='px-6 py-3 text-left text-sm font-semibold text-gray-700'>
-                Acknowledged
+                acknowledgement
               </th>
               <th className='px-6 py-3 text-left text-sm font-semibold text-gray-700'>
                 Status
@@ -147,7 +147,7 @@ function MyAsset({ assetData, fetchAssets }) {
                       {row.owner?.name || '-'}
                     </td>
                     <td className='px-6 py-4 text-sm text-gray-800'>
-                      {row.acknowledged}
+                      {row.acknowledgement}
                     </td>
                     <td className='px-6 py-4 text-sm text-gray-800'>
                       {row.status}

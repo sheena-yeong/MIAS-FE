@@ -29,7 +29,7 @@ function AssetDialog({
     invoice: "",
     owner: "",
     status: "",
-    acknowledged: "No",
+    acknowledgement: "Pending",
   });
 
   useEffect(() => {
@@ -43,7 +43,7 @@ function AssetDialog({
         invoice: selectedAsset.invoice?._id || "",
         owner: selectedAsset.owner?._id || "",
         status: selectedAsset.status || "",
-        acknowledged: selectedAsset.acknowledged || "No",
+        acknowledgement: selectedAsset.acknowledgement || "Pending",
       });
       console.log(selectedAsset);
       setIsEditMode(true);
@@ -78,7 +78,7 @@ function AssetDialog({
       invoice: "",
       owner: "",
       status: "",
-      acknowledged: "No",
+      acknowledgement: "Pending",
     });
     setIsEditMode(false);
     setSelectedAsset(null);
@@ -279,26 +279,6 @@ function AssetDialog({
             </fieldset>
 
             <fieldset className="mb-4">
-              <label className="block text-sm font-medium mb-1" htmlFor="owner">
-                Owner
-              </label>
-              <select
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                name="owner"
-                value={newAsset.owner}
-                onChange={handleInputChange}
-              >
-              <option disabled value="">Select Owner</option>
-              {associates.map((owner) => (
-                <option key={owner._id} value={owner._id}>
-                  {owner.name}
-                </option>
-              ))}
-              </select>
-            </fieldset>
-
-            <fieldset>
               <label
                 className="block text-sm font-medium mb-1"
                 htmlFor="status"
@@ -321,6 +301,27 @@ function AssetDialog({
               </select>
               {/* <p>{errMsg}</p> */}
             </fieldset>
+
+            <fieldset className="mb-4">
+              <label className="block text-sm font-medium mb-1" htmlFor="owner">
+                Owner
+              </label>
+              <select
+                required
+                disabled={newAsset.status === "Available"}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                name="owner"
+                value={newAsset.owner}
+                onChange={handleInputChange}
+              >
+              <option disabled value="">Select Owner</option>
+              {associates.map((owner) => (
+                <option key={owner._id} value={owner._id}>
+                  {owner.name}
+                </option>
+              ))}
+              </select>
+            </fieldset>            
 
             <div className="flex justify-end mt-6 gap-2">
               <button
