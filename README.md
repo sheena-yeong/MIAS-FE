@@ -1,16 +1,58 @@
-# React + Vite
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MIAS – README</title>
+</head>
+<body>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+  <h1>MIAS</h1>
 
-Currently, two official plugins are available:
+  <img src="./src/assets/mias_logo.png"/>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+  <h2>About the App</h2>
+  <p>
+    MIAS is an asset-management web application built to streamline how teams track,
+    update, and approve asset-related actions. The idea came from a team member’s day job,
+    where the limitations and scaling issues of Power Apps made maintaining data
+    increasingly painful. MIAS offers a cleaner, faster, and more flexible alternative,
+    designed to remove bottlenecks and let teams manage assets without fighting their tools.
+  </p>
 
-## React Compiler
+  <h2>Getting Started</h2>
+  <ul>
+    <li>Deployed App: <a href="https://mias-fe-production.up.railway.app" target="_blank">https://mias-fe-production.up.railway.app</a></li>
+    <li>Backend Repository: <a href="https://github.com/Simonongst/MIAS-BE" target="_blank">https://github.com/Simonongst/MIAS-BE</a></li>
+  </ul>
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+  <h2>Attributions</h2>
+  <ul>
+    <li><a href="https://nodemailer.com/" target="_blank">Nodemailer</a></li>
+    <li><a href="https://www.radix-ui.com/" target="_blank">Radix UI</a></li>
+    <li><a href="https://react-icons.github.io/react-icons/" target="_blank">React Icons</a></li>
+    <li><a href="https://recharts.org/" target="_blank">Recharts</a></li>
+  </ul>
 
-## Expanding the ESLint configuration
+  <h2>Technologies Used</h2>
+  <ul>
+    <li>React</li>
+    <li>Express + Node.js</li>
+    <li>Nodemailer</li>
+    <li>JavaScript</li>
+    <li>HTML</li>
+    <li>TailwindCSS</li>
+    <li>JWT</li>
+    <li>Axios</li>
+    <li>MongoDB</li>
+    <li>Mongoose</li>
+  </ul>
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+  <h2>Next Steps</h2>
+  <ul>
+    <li>Expand the associate’s view</li>
+    <li>Add comments to assets</li>
+    <li>Improve login security</li>
+  </ul>
+
+</body>
+</html>
