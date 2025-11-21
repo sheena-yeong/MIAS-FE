@@ -320,9 +320,13 @@ function AssetDialog({
                 required
                 disabled={newAsset.status === 'Available'}
                 className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 
-                          ${newAsset.status === "Available" ? "bg-gray-100 cursor-not-allowed" : "" }`}
+                          ${
+                            newAsset.status === 'Available'
+                              ? 'bg-gray-100 cursor-not-allowed'
+                              : ''
+                          }`}
                 name='owner'
-                value={newAsset.status === 'Available' ? "" : newAsset.owner}
+                value={newAsset.status === 'Available' ? '' : newAsset.owner}
                 onChange={handleInputChange}
               >
                 <option disabled value=''>
