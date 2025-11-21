@@ -78,7 +78,10 @@ export default function InvoiceManagement({
         <div className='flex items-center'>
           <HiOutlineRefresh
             size={25}
-            onClick={fetchInvoices}
+            onClick={() => {
+              setFilter(null);
+              fetchInvoices();
+            }}
             className='transition-transform duration-200 hover:rotate-45'
           />
           <button
