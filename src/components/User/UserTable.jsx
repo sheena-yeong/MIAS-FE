@@ -1,7 +1,7 @@
 import { MdOutlineEdit, MdDeleteOutline } from 'react-icons/md';
 import UserDeleteAlert from './UserDeleteAlert.jsx';
 import { deleteUser } from '../../services/user.js';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext.jsx';
 
 function UserTable({ 
@@ -23,6 +23,12 @@ function UserTable({
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentUsers = userData.slice(startIndex, endIndex);
+
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages || 1)
+    }
+  }, [totalPages, currentPage]);
 
   // Generate page numbers to display
   function getPageNumbers() {
