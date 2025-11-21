@@ -113,6 +113,7 @@ function AssociateDirectory({ associateData, fetchAssociates, searchQuery }) {
         openDialog={openDialog}
         setOpenDialog={setOpenDialog}
         selectedAssociate={selectedAssociate}
+        setSelectedAssociate={setSelectedAssociate}
         fetchAssociates={fetchAssociates}
       />
     </>

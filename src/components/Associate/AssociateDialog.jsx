@@ -8,6 +8,7 @@ function AssociateDialog({
   openDialog,
   setOpenDialog,
   selectedAssociate,
+  setSelectedAssociate,
   fetchAssociates,
 }) {
   /* ========== useStates and useEffect ========== */
@@ -46,6 +47,7 @@ function AssociateDialog({
       terminationDate: "",
     });
     setIsEditMode(false);
+    setSelectedAssociate(null);
   }
 
   async function handleCreateAssociate(e) {
