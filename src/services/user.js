@@ -55,3 +55,16 @@ export const updateUser = async (updatedUser, userId, token) => {
     console.log(`Error in updating user: ${error.message}`);
   }
 };
+
+export const deleteUser = async (userId, token) => {
+  try {
+    const res = await axios.delete(`${BASE_URL}/users/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.data;
+  } catch (error) {
+    console.log(`Error in deleting user: ${error.message}`);
+  }
+};
