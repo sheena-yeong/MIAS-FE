@@ -34,6 +34,12 @@ function AssetTable({
   const endIndex = startIndex + itemsPerPage;
   const currentAssets = assetData.slice(startIndex, endIndex);
 
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages || 1);
+    }
+  }, [totalPages, currentPage]);
+
   // Generate page numbers to display
   function getPageNumbers() {
     const pages = [];

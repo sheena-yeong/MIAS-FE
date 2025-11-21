@@ -1,7 +1,7 @@
 import { MdOutlineEdit, MdDeleteOutline } from 'react-icons/md';
 import InvoiceDeleteAlert from './InvoiceDeleteAlert.jsx';
 import { deleteInvoice } from '../../services/invoice.js';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext.jsx';
 
 function InvoiceTable({
@@ -23,6 +23,12 @@ function InvoiceTable({
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentInvoices = invoiceData.slice(startIndex, endIndex);
+
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages || 1);
+    }
+  }, [totalPages, currentPage]);
 
   // Generate page numbers to display
   function getPageNumbers() {
