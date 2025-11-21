@@ -92,8 +92,8 @@ function AssetDialog({
       console.log('Submitting newAsset:', newAsset);
 
       const result = await createAsset(newAsset, tokens.access);
-      if (!result.success) {
-        setErrMsg(`${result.message}`);
+      if (result.success === false) {
+        setErrMsg(result.message);
       } else {
         resetValues();
         setOpenDialog(false);
@@ -108,16 +108,21 @@ function AssetDialog({
 
   async function handleUpdateAsset(e) {
     e.preventDefault();
+    setErrMsg('');
     try {
       const result = await updateAsset(
         newAsset,
         selectedAsset._id,
         tokens.access
       );
-      resetValues();
-      setOpenDialog(false);
-      fetchAssets();
-      fetchTransactions();
+      if (result.success === false) {
+        setErrMsg(result.message);
+      } else {
+        resetValues();
+        setOpenDialog(false);
+        fetchAssets();
+        fetchTransactions();
+      }
       console.log('Asset updated:', result);
     } catch (error) {
       console.log('Failed to update asset', error);
