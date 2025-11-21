@@ -9,7 +9,7 @@
   <h2>About the App</h2>
   <p>
     MIAS is an asset-management web application built to streamline how teams track,
-    update, and approve asset-related actions. The idea came from a team member’s day job,
+    update asset-related actions. The idea came from a team member’s day job,
     where the limitations and scaling issues of Power Apps made maintaining data
     increasingly painful. MIAS offers a cleaner, faster, and more flexible alternative,
     designed to remove bottlenecks and let teams manage assets without fighting their tools.
