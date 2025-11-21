@@ -181,6 +181,7 @@ function UserDialog({
                 onChange={handleInputChange}
                 placeholder='Email'
               />
+              <p className='text-red-500'>{errMsg}</p>
             </fieldset>
 
             <fieldset className='mb-4'>
