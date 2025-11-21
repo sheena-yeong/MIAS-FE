@@ -1,5 +1,6 @@
 import { MdOutlineEdit, MdDeleteOutline } from 'react-icons/md';
-// import InvoiceDeleteAlert from './InvoiceDeleteAlert.jsx';
+import UserDeleteAlert from './UserDeleteAlert.jsx';
+import { deleteUser } from '../../services/user.js';
 import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext.jsx';
 
@@ -48,23 +49,23 @@ function UserTable({
     setSelectedRow(null);
   }
 
-  // async function handleDelete() {
-  //   try {
-  //     // await deleteInvoice(selectedInvoice._id, tokens.access);
-  //     await fetchUsers();
-  //     setOpenAlert(false);
-  //   } catch (error) {
-  //     console.error('Error deleting user:', error);
-  //   }
-  // }
+  async function handleDelete() {
+    try {
+      await deleteUser(selectedUser._id, tokens.access);
+      await fetchUsers();
+      setOpenAlert(false);
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    }
+  }
 
   return (
     <div>
-      {/* <InvoiceDeleteAlert
+      <UserDeleteAlert
         openAlert={openAlert}
         setOpenAlert={setOpenAlert}
         handleDelete={handleDelete}
-      /> */}
+      />
 
       <div className='overflow-x-auto rounded-lg border border-gray-200 shadow-sm'>
         <table className='min-w-full divide-y divide-gray-200'>
