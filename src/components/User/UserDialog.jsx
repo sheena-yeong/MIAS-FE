@@ -93,11 +93,25 @@ function UserDialog({
 
   async function handleUpdateUser(e) {
     e.preventDefault();
+    setEidErrMsg('');
+    setEmailErrMsg('');
+    setErrMsg('');
     try {
       const result = await updateUser(newUser, selectedUser._id, tokens.access);
-      resetValues();
-      setOpenDialog(false);
-      fetchUsers();
+
+      if (result.success === false) {
+        if (result.message.includes('EID')) {
+          setEidErrMsg(result.message);
+        } else if (result.message.includes('Email')) {
+          setEmailErrMsg(result.message);
+        } else {
+          setErrMsg(result.message);
+        }
+      } else {
+        resetValues();
+        setOpenDialog(false);
+        fetchUsers();
+      }
       console.log('User updated:', result);
     } catch (error) {
       console.log('Failed to update user', error);
