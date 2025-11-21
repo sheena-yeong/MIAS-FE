@@ -12,6 +12,7 @@ function UserTable({
   selectedUser,
   setSelectedUser,
   fetchUsers,
+  filteredUsers,
 }) {
   const { tokens } = useAuth();
   const [openAlert, setOpenAlert] = useState(false);
@@ -19,10 +20,11 @@ function UserTable({
   const itemsPerPage = 10;
 
   // Calculate pagination values
-  const totalPages = Math.ceil(userData.length / itemsPerPage);
+  const sourceUsers = filteredUsers || userData;
+  const totalPages = Math.ceil(sourceUsers.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentUsers = userData.slice(startIndex, endIndex);
+  const currentUsers = sourceUsers.slice(startIndex, endIndex);
 
   // Generate page numbers to display
   function getPageNumbers() {
@@ -149,8 +151,8 @@ function UserTable({
       {totalPages > 1 && (
         <div className='flex items-center justify-between mt-4 px-4'>
           <div className='text-sm text-gray-600'>
-            Showing {startIndex + 1} to {Math.min(endIndex, userData.length)}{' '}
-            of {userData.length} users
+            Showing {startIndex + 1} to {Math.min(endIndex, sourceUsers.length)}{' '}
+            of {sourceUsers.length} users
           </div>
 
           <div className='flex gap-2'>

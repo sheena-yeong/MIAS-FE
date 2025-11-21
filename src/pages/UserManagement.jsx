@@ -4,7 +4,7 @@ import { HiOutlineRefresh } from 'react-icons/hi';
 import UserTable from '../components/User/UserTable';
 import UserDialog from '../components/User/UserDialog';
 
-export default function UserManagement({ userData, fetchUsers }) {
+export default function UserManagement({ userData, fetchUsers, searchQuery }) {
   const [selectedRow, setSelectedRow] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -14,8 +14,23 @@ export default function UserManagement({ userData, fetchUsers }) {
   const [filter, setFilter] = useState(null);
 
   useEffect(() => {
-    setTableData(userData);
-  }, [userData]);
+    if(!filter) {
+      setTableData(userData);
+    } else {
+      filterData(filter);
+    }
+  }, [userData, filter]);
+
+  const filteredUsers = !searchQuery
+    ? tableData
+    : tableData.filter((user) => {
+      const query = searchQuery.toLowerCase();
+      return (
+        user.eid.toLowerCase().includes(query) ||
+        user.username.toLowerCase().includes(query) || 
+        user.email.toLowerCase().includes(query)
+    );
+  });
 
   function filterData(currentRole) {
     if (!currentRole) {
@@ -81,6 +96,7 @@ export default function UserManagement({ userData, fetchUsers }) {
         selectedUser={selectedUser}
         setSelectedUser={setSelectedUser}
         fetchUsers={fetchUsers}
+        filteredUsers={filteredUsers}
       />
       <UserDialog 
         openDialog={openDialog}

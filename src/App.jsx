@@ -153,6 +153,7 @@ function App() {
                             <UserManagement 
                               userData={userData}
                               fetchUsers={fetchUsers}
+                              searchQuery={searchQuery}
                             />
                           </RoleProtectedRoute>
                         }
