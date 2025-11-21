@@ -98,13 +98,12 @@ export default function UserManagement({ userData, fetchUsers, searchQuery }) {
       <UserTable
         selectedRow={selectedRow}
         setSelectedRow={setSelectedRow}
-        userData={tableData}
+        userData={filteredUsers}
         openDialog={openDialog}
         setOpenDialog={setOpenDialog}
         selectedUser={selectedUser}
         setSelectedUser={setSelectedUser}
         fetchUsers={fetchUsers}
-        filteredUsers={filteredUsers}
       />
       <UserDialog
         openDialog={openDialog}
