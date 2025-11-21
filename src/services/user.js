@@ -29,3 +29,16 @@ export const getUserById = async (userId, token) => {
     return null;
   }
 };
+
+export const createUser = async (newUser, token) => {
+  try {
+    const res = await axios.post(`${BASE_URL}/users`, newUser, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.data;
+  } catch (error) {
+    console.log(`Error in creating user: ${error.message}`);
+  }
+};
