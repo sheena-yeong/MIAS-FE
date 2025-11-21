@@ -164,7 +164,9 @@ function App() {
                         path="/"
                         element={
                         <RoleProtectedRoute allowedRoles={["Admin", "Editor"]}>
-                          <Dashboard assetData={assetData}/>
+                          <Dashboard 
+                            assetData={assetData}
+                            invoiceData={invoiceData}/>
                           </RoleProtectedRoute>
                         }
                       />
