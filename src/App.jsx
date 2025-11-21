@@ -186,7 +186,8 @@ function App() {
                         element={
                           <AssociateDirectory 
                             associateData={associateData}
-                            fetchAssociates={fetchAssociates}  
+                            fetchAssociates={fetchAssociates}
+                            searchQuery={searchQuery}  
                           />
                         }
                       />
@@ -196,13 +197,17 @@ function App() {
                           <InvoiceManagement
                             invoiceData={invoiceData}
                             fetchInvoices={fetchInvoices}
+                            searchQuery={searchQuery}
                           />
                         }
                       />
                       <Route
                         path="/transactions"
                         element={
-                          <AssetTransactions transactionData={transactionData} />
+                          <AssetTransactions 
+                            transactionData={transactionData} 
+                            searchQuery={searchQuery}
+                          />
                         }
                       />
                       {/* Viewer Access */}
