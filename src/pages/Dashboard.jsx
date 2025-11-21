@@ -8,7 +8,7 @@ function Dashboard({ assetData, invoiceData }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (assetData !== null && invoiceData !== null) {
+    if (assetData !== undefined && invoiceData !== undefined) {
       setLoading(false);
     }
   }, [assetData, invoiceData]);
