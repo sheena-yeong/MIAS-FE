@@ -24,24 +24,14 @@ function Dashboard({ assetData, invoiceData }) {
         </div>
       ) : hasAssetData || hasInvoiceData ? (
         <div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
-          {hasInvoiceData ? (
-            <InvoiceCountByStatus invoiceData={invoiceData} />
-          ) : (
-            <div className='flex items-center justify-center h-64 text-gray-500 text-lg font-bold'>
-              No invoice data to display
-            </div>
-          )}
+          {hasInvoiceData && <InvoiceCountByStatus invoiceData={invoiceData} />}
 
-          {hasAssetData ? (
+          {hasAssetData && (
             <>
               <AssetCountByStatus assetData={assetData} />
               <AssetCountByOrigin assetData={assetData} />
               <AvailableAssetsByCategory assetData={assetData} />
             </>
-          ) : (
-            <div className='flex items-center justify-center h-64 text-gray-500 text-lg font-bold'>
-              No asset data to display
-            </div>
           )}
         </div>
       ) : (
