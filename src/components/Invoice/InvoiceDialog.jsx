@@ -62,7 +62,7 @@ function InvoiceDialog({
     try {
       const result = await createInvoice(newInvoice, tokens.access);
       if (result.success === false) {
-        setErrMsg(`${result.message}`);
+        setErrMsg(result.message);
         return;
       } else {
         resetValues();
@@ -77,15 +77,21 @@ function InvoiceDialog({
 
   async function handleUpdateInvoice(e) {
     e.preventDefault();
+    setErrMsg('');
     try {
       const result = await updateInvoice(
         newInvoice,
         selectedInvoice._id,
         tokens.access
       );
-      resetValues();
-      setOpenDialog(false);
-      fetchInvoices();
+      if (result.success === false) {
+        setErrMsg(result.message);
+        return;
+      } else {
+        resetValues();
+        setOpenDialog(false);
+        fetchInvoices();
+      }
       console.log('Invoice updated:', result);
     } catch (error) {
       console.log('Failed to update invoice', error);
