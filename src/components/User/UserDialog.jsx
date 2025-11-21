@@ -4,10 +4,17 @@ import { useState, useEffect } from 'react';
 import { createUser, updateUser } from '../../services/user';
 import { useAuth } from '../../context/AuthContext';
 
-function UserDialog({ openDialog, setOpenDialog, selectedUser, setSelectedUser, fetchUsers }) {
+function UserDialog({
+  openDialog,
+  setOpenDialog,
+  selectedUser,
+  setSelectedUser,
+  fetchUsers,
+}) {
   /* ========== useStates and useEffect ========== */
   const { tokens } = useAuth();
   const [isEditMode, setIsEditMode] = useState(false);
+  const [errMsg, setErrMsg] = useState('');
   const [newUser, setNewUser] = useState({
     eid: '',
     username: '',
@@ -56,9 +63,13 @@ function UserDialog({ openDialog, setOpenDialog, selectedUser, setSelectedUser, 
     e.preventDefault();
     try {
       const result = await createUser(newUser, tokens.access);
-      resetValues();
-      setOpenDialog(false);
-      fetchUsers();
+      if (!result.success) {
+        setErrMsg(`${result.message}`);
+      } else {
+        resetValues();
+        setOpenDialog(false);
+        fetchUsers();
+      }
       console.log('User created:', result);
     } catch (error) {
       console.log('Failed to create user', error);
@@ -120,6 +131,7 @@ function UserDialog({ openDialog, setOpenDialog, selectedUser, setSelectedUser, 
                 placeholder='EID'
                 className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
               />
+              <p className='text-red-500'>{errMsg}</p>
             </fieldset>
 
             <fieldset className='mb-4'>
