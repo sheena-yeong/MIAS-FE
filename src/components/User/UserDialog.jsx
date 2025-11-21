@@ -57,9 +57,11 @@ function UserDialog({
       role: 'Viewer',
       isEmployed: true,
     });
+    setEidErrMsg('');
+    setEmailErrMsg('');
+    setErrMsg('');
     setIsEditMode(false);
     setSelectedUser(null);
-    setErrMsg(null);
   }
 
   async function handleCreateUser(e) {
