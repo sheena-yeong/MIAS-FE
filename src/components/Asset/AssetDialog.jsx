@@ -91,7 +91,7 @@ function AssetDialog({
 
       const result = await createAsset(newAsset, tokens.access);
       if (!result.success) {
-        setErrMsg(`Error: ${result.message}`);
+        setErrMsg(`${result.message}`);
       } else {
         resetValues();
         setOpenDialog(false);
@@ -211,6 +211,7 @@ function AssetDialog({
                 onChange={handleInputChange}
                 placeholder='e.g. A9X2D4H6Q'
               />
+              <p className='text-red-500'>{errMsg}</p>
             </fieldset>
 
             <fieldset className='mb-4'>
@@ -309,7 +310,6 @@ function AssetDialog({
                 <option value='Loaned'>Loaned</option>
                 <option value='Available'>Available</option>
               </select>
-              {/* <p>{errMsg}</p> */}
             </fieldset>
 
             <fieldset className='mb-4'>
