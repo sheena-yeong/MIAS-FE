@@ -57,6 +57,7 @@ function UserDialog({
     });
     setIsEditMode(false);
     setSelectedUser(null);
+    setErrMsg(null);
   }
 
   async function handleCreateUser(e) {
