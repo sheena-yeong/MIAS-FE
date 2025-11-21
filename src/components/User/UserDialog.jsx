@@ -22,7 +22,7 @@ function UserDialog({ openDialog, setOpenDialog, selectedUser, fetchUsers }) {
       setNewUser({
         eid: selectedUser.eid || '',
         username: selectedUser.username || '',
-        password: selectedUser.password || '',
+        password: '',
         email: selectedUser.email || '',
         role: selectedUser.role || 'Viewer',
         isEmployed: selectedUser.isEmployed || true,
