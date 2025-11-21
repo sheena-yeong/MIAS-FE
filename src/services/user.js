@@ -42,3 +42,16 @@ export const createUser = async (newUser, token) => {
     console.log(`Error in creating user: ${error.message}`);
   }
 };
+
+export const updateUser = async (updatedUser, userId, token) => {
+  try {
+    const res = await axios.put(`${BASE_URL}/users/${userId}`, updatedUser, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.data;
+  } catch (error) {
+    console.log(`Error in updating user: ${error.message}`);
+  }
+};
