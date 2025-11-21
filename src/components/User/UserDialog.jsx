@@ -39,6 +39,35 @@ function UserDialog({
     }
   }, [selectedUser]);
 
+  /* ========== Arrays ========== */
+    const roles = ["Admin", "Editor", "Viewer" ];
+  
+    /* ========== Functions ========== */
+    function resetValues() {
+      setNewUser({
+        eid: "",
+        username: "",
+        password: "",
+        email: "",
+        role: "Viewer",
+        isEmployed: true,
+      });
+      setIsEditMode(false);
+    }
+  
+    async function handleCreateUser(e) {
+      e.preventDefault();
+      try {
+        const result = await createUser(newUser, tokens.access);
+        resetValues();
+        setOpenDialog(false);
+        fetchUsers();
+        console.log("User created:", result);
+      } catch (error) {
+        console.log("Failed to create User", error);
+      }
+    }
+
   return <div>UserDialog</div>;
 }
 
