@@ -47,16 +47,17 @@ function AssociateDialog({
       email: '',
       terminationDate: '',
     });
+    setErrMsg('');
     setIsEditMode(false);
     setSelectedAssociate(null);
-    setErrMsg(null);
   }
 
   async function handleCreateAssociate(e) {
     e.preventDefault();
+    setErrMsg('');
     try {
       const result = await createAssociate(newAssociate, tokens.access);
-      if (!result.success) {
+      if (result.success === false) {
         setErrMsg(`${result.message}`);
       } else {
         resetValues();
