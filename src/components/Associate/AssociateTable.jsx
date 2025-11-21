@@ -1,7 +1,7 @@
 import { MdOutlineEdit, MdDeleteOutline } from 'react-icons/md';
 import AssociateDeleteAlert from './AssociateDeleteAlert.jsx';
 import { deleteAssociate } from '../../services/associate.js';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext.jsx';
 
 function AssociateTable({
