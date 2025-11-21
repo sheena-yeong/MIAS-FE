@@ -206,11 +206,11 @@ function AssetTable({
                     <div className='flex gap-1'>
                       <button
                         className={`p-1 rounded-lg text-white ${
-                          row.acknowledgement === 'Yes'
+                          row.acknowledgement === 'Accepted'
                             ? 'bg-gray-300 cursor-not-allowed'
                             : 'bg-green-400 cursor-pointer'
                         }`}
-                        disabled={row.acknowledgement === 'Yes'}
+                        disabled={row.acknowledgement === 'Accepted'}
                         onClick={() => {
                           handleSend(row);
                         }}
