@@ -24,6 +24,12 @@ function AssociateTable({
   const endIndex = startIndex + itemsPerPage;
   const currentAssociate = associateData.slice(startIndex, endIndex);
 
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages || 1);
+    }
+  }, [totalPages, currentPage]);
+
   // Generate page numbers to display
   function getPageNumbers() {
     const pages = [];
@@ -88,7 +94,7 @@ function AssociateTable({
               </th>
               <th className='px-6 py-3 text-left text-sm font-semibold text-gray-700'>
                 Actions
-              </th>              
+              </th>
             </tr>
           </thead>
           <tbody className='divide-y divide-gray-200'>
@@ -101,9 +107,7 @@ function AssociateTable({
                   className={`transition-colors
                   ${isSelected ? 'bg-blue-100' : 'hover:bg-gray-50'}`}
                 >
-                  <td className='px-6 py-4 text-sm text-gray-800'>
-                    {row.eid}
-                  </td>
+                  <td className='px-6 py-4 text-sm text-gray-800'>{row.eid}</td>
                   <td className='px-6 py-4 text-sm text-gray-800'>
                     {row.name}
                   </td>
@@ -111,10 +115,14 @@ function AssociateTable({
                     {row.email}
                   </td>
                   <td className='px-6 py-4 text-sm text-gray-800'>
-                    {row.terminationDate ? new Date(row.terminationDate).toLocaleDateString() : '-'}
-                  </td>                                    
+                    {row.terminationDate
+                      ? new Date(row.terminationDate).toLocaleDateString()
+                      : '-'}
+                  </td>
                   <td className='px-6 py-4 text-sm text-gray-800'>
-                    {row.createdAt ? new Date(row.createdAt).toLocaleDateString() : '-'}
+                    {row.createdAt
+                      ? new Date(row.createdAt).toLocaleDateString()
+                      : '-'}
                   </td>
                   <td className='px-6 py-4 text-sm text-gray-800'>
                     <div className='flex gap-1'>
@@ -149,8 +157,9 @@ function AssociateTable({
       {totalPages > 1 && (
         <div className='flex items-center justify-between mt-4 px-4'>
           <div className='text-sm text-gray-600'>
-            Showing {startIndex + 1} to {Math.min(endIndex, associateData.length)}{' '}
-            of {associateData.length} associates
+            Showing {startIndex + 1} to{' '}
+            {Math.min(endIndex, associateData.length)} of {associateData.length}{' '}
+            associates
           </div>
 
           <div className='flex gap-2'>
@@ -232,4 +241,4 @@ function AssociateTable({
   );
 }
 
-export default AssociateTable
+export default AssociateTable;
