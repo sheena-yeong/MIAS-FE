@@ -53,7 +53,6 @@ function AssociateTable({
     try {
       await deleteAssociate(selectedAssociate._id, tokens.access);
       await fetchAssociates();
-      setSelectedAssociate(null);
       setOpenAlert(false);
     } catch (error) {
       console.error('Error deleting associate:', error);
