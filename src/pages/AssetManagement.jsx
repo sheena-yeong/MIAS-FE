@@ -41,8 +41,10 @@ export default function AssetManagement({
         asset.serialNumber.toLowerCase().includes(query) ||
         asset.origin.toLowerCase().includes(query) ||
         asset.condition.toLowerCase().includes(query) ||
-        asset.invoice.invoiceNumber.toLowerCase().includes(query) ||
-        asset.owner.name.toLowerCase().includes(query) ||
+        (asset.invoice?.invoiceNumber && 
+          asset.invoice.invoiceNumber.toLowerCase().includes(query)) ||
+        (asset.owner?.name && 
+          asset.owner.name.toLowerCase().includes(query)) ||
         asset.acknowledgement.toLowerCase().includes(query)
     );
   });
