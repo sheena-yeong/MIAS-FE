@@ -8,6 +8,7 @@ function InvoiceDialog({
   openDialog,
   setOpenDialog,
   selectedInvoice,
+  setSelectedInvoice,
   fetchInvoices,
 }) {
   /* ========== useStates and useEffect ========== */
@@ -50,6 +51,7 @@ function InvoiceDialog({
       paymentStatus: "Pending",
     });
     setIsEditMode(false);
+    setSelectedInvoice(null);
   }
 
   async function handleCreateInvoice(e) {

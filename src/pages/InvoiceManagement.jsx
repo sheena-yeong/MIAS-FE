@@ -110,6 +110,7 @@ export default function InvoiceManagement({
         openDialog={openDialog}
         setOpenDialog={setOpenDialog}
         selectedInvoice={selectedInvoice}
+        setSelectedInvoice={setSelectedInvoice}
         fetchInvoices={fetchInvoices}
       />
     </>
