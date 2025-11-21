@@ -53,6 +53,7 @@ function InvoiceDialog({
     });
     setIsEditMode(false);
     setSelectedInvoice(null);
+    setErrMsg(null);
   }
 
   async function handleCreateInvoice(e) {

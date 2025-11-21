@@ -49,6 +49,7 @@ function AssociateDialog({
     });
     setIsEditMode(false);
     setSelectedAssociate(null);
+    setErrMsg(null);
   }
 
   async function handleCreateAssociate(e) {
