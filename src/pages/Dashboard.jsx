@@ -1,24 +1,52 @@
+import { useState, useEffect } from 'react';
 import InvoiceCountByStatus from '../components/Charts/InvoiceCountByStatus';
 import AvailableAssetsByCategory from '../components/Charts/AvailableAssetsByCategory';
 import AssetCountByOrigin from '../components/Charts/AssetCountByOrigin';
 import AssetCountByStatus from '../components/Charts/AssetCountByStatus';
 
 function Dashboard({ assetData, invoiceData }) {
-  const hasData = assetData && assetData.length > 0;
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (assetData !== null && invoiceData !== null) {
+      setLoading(false);
+    }
+  }, [assetData, invoiceData]);
+
+  const hasAssetData = assetData && assetData.length > 0;
+  const hasInvoiceData = invoiceData && invoiceData.length > 0;
 
   return (
     <>
-      {hasData ? (
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <InvoiceCountByStatus invoiceData={invoiceData}/>
-        <AssetCountByStatus assetData={assetData} />
+      {loading ? (
+        <div className='flex items-center justify-center h-64 text-gray-500 text-lg font-bold'>
+          Loading data...
+        </div>
+      ) : hasAssetData || hasInvoiceData ? (
+        <div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
+          {hasInvoiceData ? (
+            <InvoiceCountByStatus invoiceData={invoiceData} />
+          ) : (
+            <div className='flex items-center justify-center h-64 text-gray-500 text-lg font-bold'>
+              No invoice data to display
+            </div>
+          )}
 
-        <AssetCountByOrigin assetData={assetData} />
-        <AvailableAssetsByCategory assetData={assetData} />
-      </div>
+          {hasAssetData ? (
+            <>
+              <AssetCountByStatus assetData={assetData} />
+              <AssetCountByOrigin assetData={assetData} />
+              <AvailableAssetsByCategory assetData={assetData} />
+            </>
+          ) : (
+            <div className='flex items-center justify-center h-64 text-gray-500 text-lg font-bold'>
+              No asset data to display
+            </div>
+          )}
+        </div>
       ) : (
         <div className='flex items-center justify-center h-64 text-gray-500 text-lg font-bold'>
-          No asset data to display
+          No data available
         </div>
       )}
     </>
