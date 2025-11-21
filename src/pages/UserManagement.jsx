@@ -109,6 +109,7 @@ export default function UserManagement({ userData, fetchUsers, searchQuery }) {
         openDialog={openDialog}
         setOpenDialog={setOpenDialog}
         selectedUser={selectedUser}
+        setSelectedUser={setSelectedUser}
         fetchUsers={fetchUsers}
       />
     </>

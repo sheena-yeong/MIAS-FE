@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { createUser, updateUser } from '../../services/user';
 import { useAuth } from '../../context/AuthContext';
 
-function UserDialog({ openDialog, setOpenDialog, selectedUser, fetchUsers }) {
+function UserDialog({ openDialog, setOpenDialog, selectedUser, setSelectedUser, fetchUsers }) {
   /* ========== useStates and useEffect ========== */
   const { tokens } = useAuth();
   const [isEditMode, setIsEditMode] = useState(false);
@@ -49,6 +49,7 @@ function UserDialog({ openDialog, setOpenDialog, selectedUser, fetchUsers }) {
       isEmployed: true,
     });
     setIsEditMode(false);
+    setSelectedUser(null);
   }
 
   async function handleCreateUser(e) {
@@ -147,7 +148,7 @@ function UserDialog({ openDialog, setOpenDialog, selectedUser, fetchUsers }) {
               </label>
               <input
                 className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-                required
+                required={!isEditMode}
                 type='password'
                 name='password'
                 value={newUser.password}
