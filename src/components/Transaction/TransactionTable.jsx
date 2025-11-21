@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAuth, useEffect } from '../../context/AuthContext.jsx';
+import { useAuth } from '../../context/AuthContext.jsx';
 
 function TransactionTable({ transactionData, selectedRow, setSelectedRow }) {
   const { tokens } = useAuth();
@@ -11,12 +11,6 @@ function TransactionTable({ transactionData, selectedRow, setSelectedRow }) {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentTransactions = transactionData.slice(startIndex, endIndex);
-
-  useEffect(() => {
-    if (currentPage > totalPages) {
-      setCurrentPage(totalPages || 1);
-    }
-  }, [totalPages, currentPage]);
 
   // Generate page numbers to display
   function getPageNumbers() {
