@@ -112,14 +112,13 @@ export default function AssetManagement({
         selectedRow={selectedRow}
         setSelectedRow={setSelectedRow}
         // sampleAssets={sampleAssets}
-        assetData={tableData}
+        assetData={filteredAssets}
         openDialog={openDialog}
         setOpenDialog={setOpenDialog}
         selectedAsset={selectedAsset}
         setSelectedAsset={setSelectedAsset}
         fetchAssets={fetchAssets}
         setOpenPanel={setOpenPanel}
-        filteredAssets={filteredAssets}
       />
 
       <CommentsPanel

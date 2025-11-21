@@ -19,7 +19,6 @@ function AssetTable({
   setSelectedAsset,
   fetchAssets,
   setOpenPanel,
-  filteredAssets,
 }) {
   const { tokens, user } = useAuth();
   const [openAlert, setOpenAlert] = useState(false);
@@ -30,11 +29,10 @@ function AssetTable({
   const itemsPerPage = 10;
 
   // Calculate pagination values
-  const sourceAssets = filteredAssets || assetData;
-  const totalPages = Math.ceil(sourceAssets.length / itemsPerPage);
+  const totalPages = Math.ceil(assetData.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentAssets = sourceAssets.slice(startIndex, endIndex);
+  const currentAssets = assetData.slice(startIndex, endIndex);
 
   // Generate page numbers to display
   function getPageNumbers() {
@@ -257,8 +255,8 @@ function AssetTable({
       {totalPages > 1 && (
         <div className='flex items-center justify-between mt-4 px-4'>
           <div className='text-sm text-gray-600'>
-            Showing {startIndex + 1} to {Math.min(endIndex, sourceAssets.length)}{' '}
-            of {sourceAssets.length} assets
+            Showing {startIndex + 1} to {Math.min(endIndex, assetData.length)}{' '}
+            of {assetData.length} assets
           </div>
 
           <div className='flex gap-2'>
