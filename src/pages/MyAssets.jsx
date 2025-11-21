@@ -15,7 +15,7 @@ function MyAsset({ assetData, fetchAssets }) {
   useEffect(() => {
     if (user.role === 'Viewer') {
       const ownedAssets = assetData.filter(
-        (asset) => asset.owner.name === user.username
+        (asset) => asset.owner && asset.owner.name === user.username
       );
       setTableData(ownedAssets);
     } else {
