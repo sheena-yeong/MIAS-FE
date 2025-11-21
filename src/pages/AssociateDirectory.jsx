@@ -4,21 +4,32 @@ import { HiOutlineRefresh } from 'react-icons/hi';
 import AssociateTable from '../components/Associate/AssociateTable';
 import AssociateDialog from '../components/Associate/AssociateDialog';
 
-function AssociateDirectory ({ associateData, fetchAssociates }) {
+function AssociateDirectory({ associateData, fetchAssociates, searchQuery }) {
   const [selectedRow, setSelectedRow] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedAssociate, setSelectedAssociate] = useState(null);
   const [tableData, setTableData] = useState(associateData);
 
   const sortItems = [
-    { key: 'eid', label: 'EID'}, 
-    { key: 'name', label: 'Name'},
+    { key: 'eid', label: 'EID' },
+    { key: 'name', label: 'Name' },
   ];
   const [sortKey, setSortKey] = useState(null);
 
   useEffect(() => {
     setTableData(associateData);
   }, [associateData]);
+
+  const filteredAssociates = !searchQuery
+    ? tableData
+    : tableData.filter((associate) => {
+        const query = searchQuery.toLowerCase();
+        return (
+          associate.eid.toLowerCase().includes(query) ||
+          associate.name.toLowerCase().includes(query) ||
+          associate.email.toLowerCase().includes(query)
+        );
+      });
 
   function sortData(key) {
     if (!key) {
@@ -28,13 +39,13 @@ function AssociateDirectory ({ associateData, fetchAssociates }) {
     }
 
     const sorted = [...associateData].sort((a, b) => {
-      const valA = a[key] || "";
-      const valB = b[key] || "";
+      const valA = a[key] || '';
+      const valB = b[key] || '';
 
       if (valA > valB) return 1;
       if (valA < valB) return -1;
       return 0;
-    })
+    });
 
     setSortKey(key);
     setTableData(sorted);
@@ -46,13 +57,13 @@ function AssociateDirectory ({ associateData, fetchAssociates }) {
         Associate Directory
       </h3>
       <div className='flex justify-between items-center'>
-        <div className="flex items-center gap-3 ml-2">
-          <h3 className="text-md pl-3">Sort By: </h3>
+        <div className='flex items-center gap-3 ml-2'>
+          <h3 className='text-md pl-3'>Sort By: </h3>
           {sortItems.map(({ key, label }, idx) => (
             <button
               key={idx}
               className={`px-3 py-1 rounded-3xl border border-transparent hover:border-slate-500 transition-transform duration-300 ease-in-out ${
-                key === sortKey ? "bg-slate-400 text-white" : "bg-slate-200"
+                key === sortKey ? 'bg-slate-400 text-white' : 'bg-slate-200'
               }`}
               onClick={() => {
                 if (key === sortKey) {
@@ -88,22 +99,22 @@ function AssociateDirectory ({ associateData, fetchAssociates }) {
           </button>
         </div>
       </div>
-      <AssociateTable 
+      <AssociateTable
         selectedRow={selectedRow}
         setSelectedRow={setSelectedRow}
-        associateData={tableData}
+        associateData={filteredAssociates}
         openDialog={openDialog}
         setOpenDialog={setOpenDialog}
         selectedAssociate={selectedAssociate}
         setSelectedAssociate={setSelectedAssociate}
         fetchAssociates={fetchAssociates}
       />
-      <AssociateDialog 
+      <AssociateDialog
         openDialog={openDialog}
         setOpenDialog={setOpenDialog}
         selectedAssociate={selectedAssociate}
         fetchAssociates={fetchAssociates}
-      />      
+      />
     </>
   );
 }
