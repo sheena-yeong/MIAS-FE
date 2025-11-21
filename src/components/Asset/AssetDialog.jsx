@@ -80,12 +80,14 @@ function AssetDialog({
       status: '',
       acknowledgement: 'Pending',
     });
+    setErrMsg('');
     setIsEditMode(false);
     setSelectedAsset(null);
   }
 
   async function handleCreateAsset(e) {
     e.preventDefault();
+    setErrMsg('');
     try {
       console.log('Submitting newAsset:', newAsset);
 
