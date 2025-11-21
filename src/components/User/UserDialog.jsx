@@ -14,6 +14,8 @@ function UserDialog({
   /* ========== useStates and useEffect ========== */
   const { tokens } = useAuth();
   const [isEditMode, setIsEditMode] = useState(false);
+  const [eidErrMsg, setEidErrMsg] = useState('');
+  const [emailErrMsg, setEmailErrMsg] = useState('');
   const [errMsg, setErrMsg] = useState('');
   const [newUser, setNewUser] = useState({
     eid: '',
@@ -62,10 +64,19 @@ function UserDialog({
 
   async function handleCreateUser(e) {
     e.preventDefault();
+    setEidErrMsg('');
+    setEmailErrMsg('');
     try {
       const result = await createUser(newUser, tokens.access);
+
       if (!result.success) {
-        setErrMsg(`${result.message}`);
+        if (result.message.includes('eid')) {
+          setEidErrMsg(result.message);
+        } else if (result.message.includes('email')) {
+          setEmailErrMsg(result.message);
+        } else {
+          setErrMsg(result.message);
+        }
       } else {
         resetValues();
         setOpenDialog(false);
@@ -132,7 +143,7 @@ function UserDialog({
                 placeholder='EID'
                 className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
               />
-              <p className='text-red-500'>{errMsg}</p>
+              <p className='text-red-500'>{eidErrMsg}</p>
             </fieldset>
 
             <fieldset className='mb-4'>
@@ -157,7 +168,9 @@ function UserDialog({
                 className='block text-sm font-medium mb-1'
                 htmlFor='password'
               >
-                {!isEditMode ? "Password" : "Password (Skip to retain existing)"}
+                {!isEditMode
+                  ? 'Password'
+                  : 'Password (Skip to retain existing)'}
               </label>
               <input
                 className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
@@ -181,7 +194,7 @@ function UserDialog({
                 onChange={handleInputChange}
                 placeholder='Email'
               />
-              <p className='text-red-500'>{errMsg}</p>
+              <p className='text-red-500'>{emailErrMsg}</p>
             </fieldset>
 
             <fieldset className='mb-4'>
