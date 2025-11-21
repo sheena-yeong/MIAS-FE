@@ -16,7 +16,6 @@ function UserDialog({
   const [isEditMode, setIsEditMode] = useState(false);
   const [eidErrMsg, setEidErrMsg] = useState('');
   const [emailErrMsg, setEmailErrMsg] = useState('');
-  const [errMsg, setErrMsg] = useState('');
   const [newUser, setNewUser] = useState({
     eid: '',
     username: '',
@@ -59,7 +58,6 @@ function UserDialog({
     });
     setEidErrMsg('');
     setEmailErrMsg('');
-    setErrMsg('');
     setIsEditMode(false);
     setSelectedUser(null);
   }
@@ -68,7 +66,6 @@ function UserDialog({
     e.preventDefault();
     setEidErrMsg('');
     setEmailErrMsg('');
-    setErrMsg('');
     try {
       const result = await createUser(newUser, tokens.access);
 
@@ -77,9 +74,7 @@ function UserDialog({
           setEidErrMsg(result.message);
         } else if (result.message.includes('Email')) {
           setEmailErrMsg(result.message);
-        } else {
-          setErrMsg(result.message);
-        }
+        } 
       } else {
         resetValues();
         setOpenDialog(false);
@@ -95,7 +90,6 @@ function UserDialog({
     e.preventDefault();
     setEidErrMsg('');
     setEmailErrMsg('');
-    setErrMsg('');
     try {
       const result = await updateUser(newUser, selectedUser._id, tokens.access);
 
@@ -104,8 +98,6 @@ function UserDialog({
           setEidErrMsg(result.message);
         } else if (result.message.includes('Email')) {
           setEmailErrMsg(result.message);
-        } else {
-          setErrMsg(result.message);
         }
       } else {
         resetValues();
