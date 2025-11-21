@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { IoIosAddCircle } from 'react-icons/io';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import UserTable from '../components/User/UserTable';
+import UserDialog from '../components/User/UserDialog';
 
 export default function UserManagement({ userData, fetchUsers }) {
   const [selectedRow, setSelectedRow] = useState(null);
@@ -79,6 +80,12 @@ export default function UserManagement({ userData, fetchUsers }) {
         setOpenDialog={setOpenDialog}
         selectedUser={selectedUser}
         setSelectedUser={setSelectedUser}
+        fetchUsers={fetchUsers}
+      />
+      <UserDialog 
+        openDialog={openDialog}
+        setOpenDialog={setOpenDialog}
+        selectedUser={selectedUser}
         fetchUsers={fetchUsers}
       />
     </>
