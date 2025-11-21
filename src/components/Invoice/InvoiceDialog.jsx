@@ -61,6 +61,7 @@ function InvoiceDialog({
       const result = await createInvoice(newInvoice, tokens.access);
       if (!result.success) {
         setErrMsg(`${result.message}`);
+        return;
       } else {
         resetValues();
         setOpenDialog(false);
