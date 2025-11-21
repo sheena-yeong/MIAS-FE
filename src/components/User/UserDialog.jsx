@@ -66,13 +66,14 @@ function UserDialog({
     e.preventDefault();
     setEidErrMsg('');
     setEmailErrMsg('');
+    setErrMsg('');
     try {
       const result = await createUser(newUser, tokens.access);
 
-      if (!result.success) {
-        if (result.message.includes('eid')) {
+      if (result.success === false) {
+        if (result.message.includes('EID')) {
           setEidErrMsg(result.message);
-        } else if (result.message.includes('email')) {
+        } else if (result.message.includes('Email')) {
           setEmailErrMsg(result.message);
         } else {
           setErrMsg(result.message);
