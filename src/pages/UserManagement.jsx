@@ -10,11 +10,11 @@ export default function UserManagement({ userData, fetchUsers, searchQuery }) {
   const [selectedUser, setSelectedUser] = useState(null);
   const [tableData, setTableData] = useState(userData);
 
-  const filterItems = ['Admin', 'Editor', 'Viewer'];
+  const filterItems = ['Admin', 'Editor', 'Viewer', 'Employed', 'Unemployed'];
   const [filter, setFilter] = useState(null);
 
   useEffect(() => {
-    if(!filter) {
+    if (!filter) {
       setTableData(userData);
     } else {
       filterData(filter);
@@ -24,19 +24,27 @@ export default function UserManagement({ userData, fetchUsers, searchQuery }) {
   const filteredUsers = !searchQuery
     ? tableData
     : tableData.filter((user) => {
-      const query = searchQuery.toLowerCase();
-      return (
-        user.eid.toLowerCase().includes(query) ||
-        user.username.toLowerCase().includes(query) || 
-        user.email.toLowerCase().includes(query)
-    );
-  });
+        const query = searchQuery.toLowerCase();
+        return (
+          user.eid.toLowerCase().includes(query) ||
+          user.username.toLowerCase().includes(query) ||
+          user.email.toLowerCase().includes(query)
+        );
+      });
 
-  function filterData(currentRole) {
-    if (!currentRole) {
+  function filterData(currentFilter) {
+    if (!currentFilter) {
       setTableData(userData);
-    } else {
-      setTableData(userData.filter((user) => user.role === currentRole));
+    } else if (['Admin', 'Editor', 'Viewer'].includes(currentFilter)) {
+      setTableData(userData.filter((user) => user.role === currentFilter));
+    } else if (['Employed', 'Unemployed'].includes(currentFilter)) {
+      setTableData(
+        userData.filter((user) =>
+          currentFilter === 'Employed'
+            ? user.isEmployed === true
+            : user.isEmployed === false
+        )
+      );
     }
   }
 
@@ -98,7 +106,7 @@ export default function UserManagement({ userData, fetchUsers, searchQuery }) {
         fetchUsers={fetchUsers}
         filteredUsers={filteredUsers}
       />
-      <UserDialog 
+      <UserDialog
         openDialog={openDialog}
         setOpenDialog={setOpenDialog}
         selectedUser={selectedUser}
