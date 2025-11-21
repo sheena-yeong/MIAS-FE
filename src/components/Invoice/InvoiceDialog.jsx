@@ -51,16 +51,17 @@ function InvoiceDialog({
       price: '',
       paymentStatus: 'Pending',
     });
+    setErrMsg('');
     setIsEditMode(false);
     setSelectedInvoice(null);
-    setErrMsg(null);
   }
 
   async function handleCreateInvoice(e) {
     e.preventDefault();
+    setErrMsg('');
     try {
       const result = await createInvoice(newInvoice, tokens.access);
-      if (!result.success) {
+      if (result.success === false) {
         setErrMsg(`${result.message}`);
         return;
       } else {
