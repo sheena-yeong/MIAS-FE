@@ -1,16 +1,16 @@
-import TotalAssets from '../components/Charts/TotalAssets';
+import InvoiceCountByStatus from '../components/Charts/InvoiceCountByStatus';
 import AvailableAssetsByCategory from '../components/Charts/AvailableAssetsByCategory';
 import AssetCountByOrigin from '../components/Charts/AssetCountByOrigin';
 import AssetCountByStatus from '../components/Charts/AssetCountByStatus';
 
-function Dashboard({ assetData }) {
+function Dashboard({ assetData, invoiceData }) {
   const hasData = assetData && assetData.length > 0;
 
   return (
     <>
       {hasData ? (
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {/* <TotalAssets assetData={assetData}/> */}
+        <InvoiceCountByStatus invoiceData={invoiceData}/>
         <AssetCountByStatus assetData={assetData} />
 
         <AssetCountByOrigin assetData={assetData} />
