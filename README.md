@@ -23,14 +23,25 @@
 
   <h2>Features</h2>
   <ul>
+    <li>Sign In Page</li>
+    <img src="./src/assets/readme/SignIn.png"/>
     <li>Dashboard displaying key statistics for quick insights</li>
+    <img src="./src/assets/readme/Dashboard.png"/>
     <li>Manage assets with full create, update, and tracking capabilities</li>
+    <img src="./src/assets/readme/Asset.png"/>
     <li>Ability to trigger email notifications to associates for asset acknowledgement</li>
+    <img src="./src/assets/readme/AssetAck.png"/>
     <li>Manage invoices linked to assets</li>
+    <img src="./src/assets/readme/Invoice.png"/>
     <li>User account management including registration, login, and role-based access control</li>
+    <img src="./src/assets/readme/User.png"/>
     <li>Associate accounts with protected routes that unlock different views based on role</li>
-    <li>Password management including change-password and forgot-password workflows</li>
+    <img src="./src/assets/readme/Associate.png"/>
     <li>Transaction log capturing all asset-related changes</li>
+    <img src="./src/assets/readme/Transactions.png"/>
+    <li>Password management including change-password and forgot-password workflows</li>
+    <img src="./src/assets/readme/Settings.png"/>
+    <img src="./src/assets/readme/ForgotPassword.png"/>
   </ul>
 
   <h2>Attributions</h2>
