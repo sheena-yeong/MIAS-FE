@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-</head>
-<body>
   <img src="./src/assets/mias-readme-banner-v2.png"/>
 
   <h2>About the App</h2>
@@ -89,6 +83,3 @@
     <li>Add comments to assets</li>
     <li>Improve login security</li>
   </ul>
-
-</body>
-</html>
